@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Palau</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- メニュー -->
+    <string name="nav_search_novel">小説を探す</string>
+    <string name="nav_novel_rank">ランキング</string>
+    <string name="nav_novel_search">検索</string>
+    <string name="nav_novel_recommended">おすすめ</string>
+
+    <!-- ランキング -->
+    <string name="ranking_daily">日間</string>
+    <string name="ranking_weekly">週間</string>
+    <string name="ranking_monthly">月間</string>
+    <string name="ranking_quarter">四半期</string>
+
+    <!-- 出力順序 -->
+    <string name="allunique">閲覧者の多い順(未実装)</string>
+    <string name="favnovelcnt">ブックマーク数の多い順</string>
+    <string name="reviewcnt">レビュー数の多い順</string>
+    <string name="hyoka">総合評価の高い順</string>
+    <string name="hyokaasc">総合評価の低い順</string>
+    <string name="impressioncnt">感想の多い順</string>
+    <string name="hyokacnt">評価者数の多い順</string>
+    <string name="hyokacntasc">評価者数の少ない順</string>
+    <string name="weekly">週間ユニークユーザの多い順</string>
+    <string name="lengthdesc">小説本文の文字数が多い順</string>
+    <string name="lengthasc">小説本文の文字数が少ない順</string>
+    <string name="ncodedesc">Nコードが新しい順</string>
+    <string name="old">古い順</string>
+</resources>
