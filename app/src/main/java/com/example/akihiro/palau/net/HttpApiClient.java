@@ -58,7 +58,6 @@ public class HttpApiClient extends AsyncTask<String, Void, String> {
 
                 inputStream = httpURLConnection.getInputStream();
                 gzipInputStream = new GZIPInputStream(inputStream);
-//                inputStreamReader = new InputStreamReader(inputStream);
                 inputStreamReader = new InputStreamReader(gzipInputStream);
                 bufferedReader = new BufferedReader(inputStreamReader);
 
