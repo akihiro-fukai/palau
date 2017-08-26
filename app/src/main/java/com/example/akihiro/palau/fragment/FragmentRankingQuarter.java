@@ -1,6 +1,8 @@
 package com.example.akihiro.palau.fragment;
 
 import com.example.akihiro.palau.R;
+import com.example.akihiro.palau.net.NetConfig;
+import com.example.akihiro.palau.net.RequestType;
 
 public class FragmentRankingQuarter extends FragmentBase {
 
@@ -12,6 +14,11 @@ public class FragmentRankingQuarter extends FragmentBase {
     }
 
     @Override
+    protected void onSuccess(RequestType type, String result) {
+
+    }
+
+    @Override
     protected int getTitleResId() {
 
         return 0;
@@ -20,6 +27,6 @@ public class FragmentRankingQuarter extends FragmentBase {
     @Override
     protected int getLayoutResId() {
 
-        return R.layout.fragment_ranking;
+        return R.layout.fragment_ranking_quarter;
     }
 }

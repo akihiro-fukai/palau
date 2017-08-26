@@ -17,4 +17,5 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <include layout="@layout/view_ranking_list_item"/>
 </android.support.constraint.ConstraintLayout>

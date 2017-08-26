@@ -1,10 +1,8 @@
 package com.example.akihiro.palau.fragment;
 
-import android.os.Bundle;
-
 import com.example.akihiro.palau.R;
-
-import static com.example.akihiro.palau.common.UICommon.BUNDLE_PAGER_PAGE;
+import com.example.akihiro.palau.net.NetConfig;
+import com.example.akihiro.palau.net.RequestType;
 
 public class FragmentRankingWeekly extends FragmentBase {
 
@@ -16,6 +14,11 @@ public class FragmentRankingWeekly extends FragmentBase {
     }
 
     @Override
+    protected void onSuccess(RequestType type, String result) {
+
+    }
+
+    @Override
     protected int getTitleResId() {
 
         return 0;
@@ -24,6 +27,6 @@ public class FragmentRankingWeekly extends FragmentBase {
     @Override
     protected int getLayoutResId() {
 
-        return R.layout.fragment_ranking;
+        return R.layout.fragment_ranking_weekly;
     }
 }

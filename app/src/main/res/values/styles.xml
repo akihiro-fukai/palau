@@ -8,6 +8,19 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Toolbar theme. -->
+    <style name="ToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!--タイトルテキストの色-->
+        <item name="android:textColorPrimary">@color/colorToolbarTextPrimary</item>
+        <!--ハンバーガーボタンなどのアイコンの色-->
+        <item name="android:textColorSecondary">@color/colorToolbarTextSecondary</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
