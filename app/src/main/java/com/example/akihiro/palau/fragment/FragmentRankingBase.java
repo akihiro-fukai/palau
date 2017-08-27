@@ -4,9 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateFormat;
 
-import com.example.akihiro.palau.R;
 import com.example.akihiro.palau.adapter.RankingCardRecyclerAdapter;
 import com.example.akihiro.palau.net.NetConfig;
 import com.example.akihiro.palau.net.common.RequestParam;
@@ -17,34 +15,23 @@ import com.example.akihiro.palau.net.response.item.Ranking;
 import com.example.akihiro.palau.net.response.item.RankingDetail;
 import com.example.akihiro.palau.parser.JsonParser;
 
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.example.akihiro.palau.net.common.RequestType.RANKING_DAILY;
-import static com.example.akihiro.palau.net.common.RequestType.RANKING_DETAIL;
 import static com.example.akihiro.palau.net.common.RequestParam.GZIP;
 import static com.example.akihiro.palau.net.common.RequestParam.LIMIT;
 import static com.example.akihiro.palau.net.common.RequestParam.NCODE;
 import static com.example.akihiro.palau.net.common.RequestParam.RTYPE;
+import static com.example.akihiro.palau.net.common.RequestType.RANKING_DETAIL;
+import static com.example.akihiro.palau.net.common.RequestType.RANKING_MONTHLY;
 
-public class FragmentRankingDaily extends FragmentBase {
-
-    private static FragmentRankingDaily sSelf;
+public abstract class FragmentRankingBase extends FragmentBase {
 
     private HashMap<String, Integer> mRankingMap = new HashMap<>();
     private List<RankingDetail> mRankingDetails;
-
-    public static FragmentRankingDaily getInstance() {
-
-        if (null == sSelf) {
-
-            sSelf = new FragmentRankingDaily();
-        }
-        return sSelf;
-    }
+    protected boolean mIsRetryRTypeRequest;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -55,10 +42,9 @@ public class FragmentRankingDaily extends FragmentBase {
             setRankingDetailView(mRankingDetails);
         } else {
 
-            final String inFormat = "yyyyMMdd";
-            String date = DateFormat.format(inFormat, Calendar.getInstance()).toString();
+            String rType = getRType();
 
-            requestRankingDaily(date);
+            requestRanking(rType);
         }
     }
 
@@ -66,16 +52,16 @@ public class FragmentRankingDaily extends FragmentBase {
     // 通信要求
     // ------------------------------
 
-    private void requestRankingDaily(String date) {
+    protected void requestRanking(String rType) {
 
         HashMap<RequestParam, String> params = new HashMap<>();
         params.put(GZIP, "5");
-        params.put(RTYPE, date + "-d");
+        params.put(RTYPE, rType);
 
-        httpRequest(NetConfig.RANK_HOST, params, RANKING_DAILY);
+        httpRequest(NetConfig.RANK_HOST, params, RANKING_MONTHLY);
     }
 
-    private void requestRankingDailyDetail(List<Ranking> rankings) {
+    protected void requestRankingDailyDetail(List<Ranking> rankings) {
 
         HashMap<RequestParam, String> params = new HashMap<>();
         params.put(GZIP, "5");
@@ -99,16 +85,27 @@ public class FragmentRankingDaily extends FragmentBase {
     @Override
     protected void onSuccess(RequestType type, String result) {
 
-        if (RANKING_DAILY == type) {
+        switch (type) {
 
-            handleRankingDaily(result);
-        } else if (RANKING_DETAIL == type) {
+            case RANKING_DAILY:
+            case RANKING_WEEKLY:
+            case RANKING_MONTHLY:
+            case RANKING_QUARTER:
 
-            handleRankingDailyDetail(result);
+                handleRanking(result);
+                break;
+            case RANKING_DETAIL:
+
+                handleRankingDetail(result);
+                break;
         }
     }
 
-    private void handleRankingDaily(String result) {
+    // ------------------------------
+    // 初期化
+    // ------------------------------
+
+    private void handleRanking(String result) {
 
         if (null != result && !result.isEmpty()) {
 
@@ -123,20 +120,19 @@ public class FragmentRankingDaily extends FragmentBase {
             requestRankingDailyDetail(rankings);
         } else {
 
-            // 日間ランキングは1日3回更新されていますが、
-            // このAPIでは午前4時～午前7時に作成した日間ランキングのみを蓄積しAPIで提供しています。
-            // 深夜帯は当日のランキング取得エラーが発生するため前日のランキングを取得します。
+            String rType = getRetryRType();
+            if (null == rType) {
 
-            final String inFormat = "yyyyMMdd";
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DAY_OF_MONTH, -1);
-            String date = DateFormat.format(inFormat, calendar).toString();
+                onRTypeError();
 
-            requestRankingDaily(date);
+                return;
+            }
+
+            requestRanking(rType);
         }
     }
 
-    private void handleRankingDailyDetail(String result) {
+    private void handleRankingDetail(String result) {
 
         RankingDetailResponse rankingDetailResponse = JsonParser.parseRankingDetail(result);
         if (null != rankingDetailResponse) {
@@ -160,7 +156,7 @@ public class FragmentRankingDaily extends FragmentBase {
     private void setRankingDetailView(List<RankingDetail> rankingDetails) {
 
         RankingCardRecyclerAdapter adapter = new RankingCardRecyclerAdapter(getContext(), rankingDetails);
-        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.ranking_daily_recycler_view);
+        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(getRankingDetailViewId());
         recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -168,15 +164,33 @@ public class FragmentRankingDaily extends FragmentBase {
         recyclerView.setAdapter(adapter);
     }
 
-    @Override
-    protected int getTitleResId() {
+    protected static void sortAsc(List<RankingDetail> rankingDetails) {
 
-        return 0;
+        Collections.sort(rankingDetails, new Comparator<RankingDetail>() {
+
+            public int compare(RankingDetail o1, RankingDetail o2) {
+
+                if (o1.getRank() < o2.getRank()) {
+
+                    return -1;
+                }
+
+                if (o1.getRank() > o2.getRank()) {
+
+                    return 1;
+                }
+                return 0;
+            }
+        });
     }
 
-    @Override
-    protected int getLayoutResId() {
+    protected abstract int getLayoutResId();
 
-        return R.layout.fragment_ranking_daily;
-    }
+    protected abstract int getRankingDetailViewId();
+
+    protected abstract String getRType();
+
+    protected abstract String getRetryRType();
+
+    protected abstract void onRTypeError();
 }
