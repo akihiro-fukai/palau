@@ -11,8 +11,12 @@ import android.view.ViewGroup;
 import com.example.akihiro.palau.net.HttpApiClient;
 import com.example.akihiro.palau.net.common.RequestParam;
 import com.example.akihiro.palau.net.common.RequestType;
+import com.example.akihiro.palau.net.response.item.RankingDetail;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 public abstract class FragmentBase extends Fragment {
@@ -63,6 +67,27 @@ public abstract class FragmentBase extends Fragment {
             }
         }
     };
+
+    protected static List<RankingDetail> sortAsc(List<RankingDetail> rankingDetails) {
+
+        Collections.sort(rankingDetails, new Comparator<RankingDetail>() {
+
+            public int compare(RankingDetail o1, RankingDetail o2) {
+
+                if (o1.getRank() < o2.getRank()) {
+
+                    return -1;
+                }
+
+                if (o1.getRank() > o2.getRank()) {
+
+                    return 1;
+                }
+                return 0;
+            }
+        });
+        return rankingDetails;
+    }
 
     protected abstract void onSuccess(RequestType type, String result);
 

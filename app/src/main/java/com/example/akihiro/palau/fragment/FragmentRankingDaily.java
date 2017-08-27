@@ -157,27 +157,6 @@ public class FragmentRankingDaily extends FragmentBase {
         }
     }
 
-    private static List<RankingDetail> sortAsc(List<RankingDetail> rankingDetails){
-
-        Collections.sort(rankingDetails, new Comparator<RankingDetail>() {
-
-            public int compare(RankingDetail o1, RankingDetail o2) {
-
-                if (o1.getRank() < o2.getRank()) {
-
-                    return -1;
-                }
-
-                if (o1.getRank() > o2.getRank()) {
-
-                    return 1;
-                }
-                return 0;
-            }
-        });
-        return rankingDetails;
-    }
-
     private void setRankingDetailView(List<RankingDetail> rankingDetails) {
 
         RankingCardRecyclerAdapter adapter = new RankingCardRecyclerAdapter(getContext(), rankingDetails);
