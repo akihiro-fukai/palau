@@ -8,4 +8,10 @@
     <color name="colorToolbarTextPrimary">#7e441b</color>
     <color name="colorToolbarTextSecondary">#7e441b</color>
 
+    <!-- ランキング -->
+    <color name="colorRankingTitleText">#7e441b</color>
+    <color name="colorRankingText">#fff</color>
+    <color name="colorRankingTextBackground">#e5ac84</color>
+    <color name="colorRankingWriterText">#6eda83</color>
+    <color name="colorRankingGenreText">#fff</color>
 </resources>

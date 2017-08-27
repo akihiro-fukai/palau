@@ -9,9 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.akihiro.palau.net.HttpApiClient;
-import com.example.akihiro.palau.net.NetConfig;
-import com.example.akihiro.palau.net.RequestParam;
-import com.example.akihiro.palau.net.RequestType;
+import com.example.akihiro.palau.net.common.RequestParam;
+import com.example.akihiro.palau.net.common.RequestType;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -66,6 +65,8 @@ public abstract class FragmentBase extends Fragment {
     };
 
     protected abstract void onSuccess(RequestType type, String result);
+
     protected abstract int getTitleResId();
+
     protected abstract int getLayoutResId();
 }

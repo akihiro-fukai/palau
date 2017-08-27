@@ -21,12 +21,85 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:padding="@dimen/card_view_margin">
 
-            <TextView
-                android:id="@+id/textView_main"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/content_margin"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ranking_crown"
+                    android:layout_width="@dimen/ranking_crown_image_size"
+                    android:layout_height="@dimen/ranking_crown_image_size"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/content_margin"
+                    android:src="@drawable/ic_crown_gold"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/ranking"
+                    android:layout_width="@dimen/ranking_text_width"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorRankingTextBackground"
+                    android:gravity="center"
+                    android:padding="@dimen/ranking_text_margin"
+                    android:textColor="@color/colorRankingText"
+                    android:textSize="@dimen/ranking_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/novel_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorRankingTitleText"
+                    android:textSize="@dimen/ranking_title_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/novel_writer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorRankingWriterText"
+                    android:textSize="@dimen/ranking_writer_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/novel_genre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/ranking_genre_text_size" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/novel_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:textSize="@dimen/ranking_status_text_size" />
+
+                    <TextView
+                        android:id="@+id/novel_last_up"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:textSize="@dimen/ranking_last_up_text_size" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

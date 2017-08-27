@@ -17,6 +17,8 @@
     <string name="ranking_weekly">週間</string>
     <string name="ranking_monthly">月間</string>
     <string name="ranking_quarter">四半期</string>
+    <string name="ranking_order">%d位</string>
+    <string name="ranking_info">%1$s　全%2$d話</string>
 
     <!-- 出力順序 -->
     <string name="allunique">閲覧者の多い順(未実装)</string>
@@ -32,4 +34,32 @@
     <string name="lengthasc">小説本文の文字数が少ない順</string>
     <string name="ncodedesc">Nコードが新しい順</string>
     <string name="old">古い順</string>
+
+    <!-- ジャンル -->
+    <string name="genre_different_dimension_world">異世界〔恋愛〕</string>
+    <string name="genre_real_world">現実世界〔恋愛〕</string>
+    <string name="genre_high_fantasy">ハイファンタジー〔ファンタジー〕</string>
+    <string name="genre_low_fantasy">ローファンタジー〔ファンタジー〕</string>
+    <string name="genre_pure_literature">純文学〔文芸〕</string>
+    <string name="genre_human_drama">ヒューマンドラマ〔文芸〕</string>
+    <string name="genre_history">歴史〔文芸〕</string>
+    <string name="genre_reasoning">推理〔文芸〕</string>
+    <string name="genre_horror">ホラー〔文芸〕</string>
+    <string name="genre_action">アクション〔文芸〕</string>
+    <string name="genre_comedy">コメディー〔文芸〕</string>
+    <string name="genre_vr_game">VRゲーム〔SF〕</string>
+    <string name="genre_space">宇宙〔SF〕</string>
+    <string name="genre_science_of_fantasy">空想科学〔SF〕</string>
+    <string name="genre_panic">パニック〔SF〕</string>
+    <string name="genre_nursery_tale">童話〔その他〕</string>
+    <string name="genre_poem">詩〔その他〕</string>
+    <string name="genre_essay">エッセイ〔その他〕</string>
+    <string name="genre_replay">リプレイ〔その他〕</string>
+    <string name="genre_non">ノンジャンル〔ノンジャンル〕</string>
+    <string name="genre_other">その他〔その他〕</string>
+
+    <!-- ステータス -->
+    <string name="status_series_in">連載中</string>
+    <string name="status_series_out">完結済</string>
+    <string name="status_short_story">短編</string>
 </resources>

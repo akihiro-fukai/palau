@@ -1,8 +1,7 @@
 package com.example.akihiro.palau.fragment;
 
 import com.example.akihiro.palau.R;
-import com.example.akihiro.palau.net.NetConfig;
-import com.example.akihiro.palau.net.RequestType;
+import com.example.akihiro.palau.net.common.RequestType;
 
 public class FragmentRankingMonthly extends FragmentBase {
 

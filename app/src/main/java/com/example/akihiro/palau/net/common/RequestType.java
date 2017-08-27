@@ -1,4 +1,4 @@
-package com.example.akihiro.palau.net;
+package com.example.akihiro.palau.net.common;
 
 public enum RequestType {
 

@@ -15,4 +15,15 @@
     <!-- CardView余白 -->
     <dimen name="card_view_margin">10dp</dimen>
 
+    <!-- ランキング -->
+    <dimen name="ranking_title_text_size">16sp</dimen>
+    <dimen name="ranking_crown_image_size">16dp</dimen>
+    <dimen name="ranking_text_size">12sp</dimen>
+    <dimen name="ranking_text_width">48dp</dimen>
+    <dimen name="ranking_text_margin">4dp</dimen>
+    <dimen name="ranking_writer_text_size">12sp</dimen>
+    <dimen name="ranking_genre_text_size">12sp</dimen>
+    <dimen name="ranking_status_text_size">12sp</dimen>
+    <dimen name="ranking_last_up_text_size">12sp</dimen>
+
 </resources>

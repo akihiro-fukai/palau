@@ -9,8 +9,8 @@ import android.text.format.DateFormat;
 import com.example.akihiro.palau.R;
 import com.example.akihiro.palau.adapter.RankingCardRecyclerAdapter;
 import com.example.akihiro.palau.net.NetConfig;
-import com.example.akihiro.palau.net.RequestParam;
-import com.example.akihiro.palau.net.RequestType;
+import com.example.akihiro.palau.net.common.RequestParam;
+import com.example.akihiro.palau.net.common.RequestType;
 import com.example.akihiro.palau.net.response.RankingDetailResponse;
 import com.example.akihiro.palau.net.response.RankingResponse;
 import com.example.akihiro.palau.net.response.item.Ranking;
@@ -23,12 +23,12 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.example.akihiro.palau.net.RequestType.RANKING_DAILY;
-import static com.example.akihiro.palau.net.RequestType.RANKING_DETAIL;
-import static com.example.akihiro.palau.net.RequestParam.GZIP;
-import static com.example.akihiro.palau.net.RequestParam.LIMIT;
-import static com.example.akihiro.palau.net.RequestParam.NCODE;
-import static com.example.akihiro.palau.net.RequestParam.RTYPE;
+import static com.example.akihiro.palau.net.common.RequestType.RANKING_DAILY;
+import static com.example.akihiro.palau.net.common.RequestType.RANKING_DETAIL;
+import static com.example.akihiro.palau.net.common.RequestParam.GZIP;
+import static com.example.akihiro.palau.net.common.RequestParam.LIMIT;
+import static com.example.akihiro.palau.net.common.RequestParam.NCODE;
+import static com.example.akihiro.palau.net.common.RequestParam.RTYPE;
 
 public class FragmentRankingDaily extends FragmentBase {
 
