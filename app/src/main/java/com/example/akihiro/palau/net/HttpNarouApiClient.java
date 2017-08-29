@@ -13,7 +13,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.zip.GZIPInputStream;
 
-public class HttpApiClient extends AsyncTask<String, Void, String> {
+public class HttpNarouApiClient extends AsyncTask<String, Void, String> {
 
     private static final int READ_TIMEOUT = 1000;
     private static final int CONNECT_TIMEOUT = 3000;
