@@ -43,10 +43,10 @@
                     android:id="@+id/ranking"
                     android:layout_width="@dimen/ranking_text_width"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorRankingTextBackground"
+                    android:background="@color/ranking_text_background"
                     android:gravity="center"
                     android:padding="@dimen/ranking_text_margin"
-                    android:textColor="@color/colorRankingText"
+                    android:textColor="@color/ranking_text"
                     android:textSize="@dimen/ranking_text_size"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -60,7 +60,7 @@
                     android:id="@+id/novel_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorRankingTitleText"
+                    android:textColor="@color/ranking_title_text"
                     android:textSize="@dimen/ranking_title_text_size"
                     android:textStyle="bold" />
 
@@ -68,7 +68,7 @@
                     android:id="@+id/novel_writer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorRankingWriterText"
+                    android:textColor="@color/ranking_writer_text"
                     android:textSize="@dimen/ranking_writer_text_size"
                     android:textStyle="bold" />
 

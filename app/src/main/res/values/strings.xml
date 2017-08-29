@@ -19,6 +19,7 @@
     <string name="ranking_quarter">四半期</string>
     <string name="ranking_order">%d位</string>
     <string name="ranking_info">%1$s　全%2$d話</string>
+    <string name="ranking_detail_dialog_close">閉じる</string>
 
     <!-- 出力順序 -->
     <string name="allunique">閲覧者の多い順(未実装)</string>

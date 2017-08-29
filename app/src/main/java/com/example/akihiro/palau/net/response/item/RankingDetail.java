@@ -1,6 +1,9 @@
 package com.example.akihiro.palau.net.response.item;
 
-public class RankingDetail {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class RankingDetail implements Parcelable {
 
     /**
      * 小説名
@@ -140,6 +143,59 @@ public class RankingDetail {
      * ランキング
      */
     private int rank;
+
+    private RankingDetail(Parcel in) {
+        title = in.readString();
+        nCode = in.readString();
+        userId = in.readInt();
+        writer = in.readString();
+        story = in.readString();
+        bigGenre = in.readInt();
+        genre = in.readInt();
+        gensaku = in.readString();
+        keyword = in.readString();
+        generalFirstup = in.readString();
+        generalLastup = in.readString();
+        novelType = in.readInt();
+        end = in.readInt();
+        generalAllNo = in.readInt();
+        length = in.readInt();
+        time = in.readInt();
+        isStop = in.readInt();
+        isR15 = in.readInt();
+        isBL = in.readInt();
+        isGL = in.readInt();
+        isZankoku = in.readInt();
+        isTensei = in.readInt();
+        isTenni = in.readInt();
+        pcOrK = in.readInt();
+        globalPoint = in.readInt();
+        favNovelCnt = in.readInt();
+        reviewCnt = in.readInt();
+        allPoint = in.readInt();
+        allHyokaCnt = in.readInt();
+        sasieCnt = in.readInt();
+        kaiwaritu = in.readInt();
+        novelUpdatedAt = in.readString();
+        updatedAt = in.readString();
+        rank = in.readInt();
+    }
+
+    public static final Creator<RankingDetail> CREATOR = new Creator<RankingDetail>() {
+        @Override
+        public RankingDetail createFromParcel(Parcel in) {
+            return new RankingDetail(in);
+        }
+
+        @Override
+        public RankingDetail[] newArray(int size) {
+            return new RankingDetail[size];
+        }
+    };
+
+    public RankingDetail() {
+
+    }
 
     public String getTitle() {
         return title;
@@ -411,5 +467,48 @@ public class RankingDetail {
 
     public void setRank(int rank) {
         this.rank = rank;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(nCode);
+        dest.writeInt(userId);
+        dest.writeString(writer);
+        dest.writeString(story);
+        dest.writeInt(bigGenre);
+        dest.writeInt(genre);
+        dest.writeString(gensaku);
+        dest.writeString(keyword);
+        dest.writeString(generalFirstup);
+        dest.writeString(generalLastup);
+        dest.writeInt(novelType);
+        dest.writeInt(end);
+        dest.writeInt(generalAllNo);
+        dest.writeInt(length);
+        dest.writeInt(time);
+        dest.writeInt(isStop);
+        dest.writeInt(isR15);
+        dest.writeInt(isBL);
+        dest.writeInt(isGL);
+        dest.writeInt(isZankoku);
+        dest.writeInt(isTensei);
+        dest.writeInt(isTenni);
+        dest.writeInt(pcOrK);
+        dest.writeInt(globalPoint);
+        dest.writeInt(favNovelCnt);
+        dest.writeInt(reviewCnt);
+        dest.writeInt(allPoint);
+        dest.writeInt(allHyokaCnt);
+        dest.writeInt(sasieCnt);
+        dest.writeInt(kaiwaritu);
+        dest.writeString(novelUpdatedAt);
+        dest.writeString(updatedAt);
+        dest.writeInt(rank);
     }
 }

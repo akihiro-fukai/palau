@@ -1,17 +1,18 @@
 package com.example.akihiro.palau.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.akihiro.palau.R;
+import com.example.akihiro.palau.fragment.dialog.RankingDetailDialogFragment;
 import com.example.akihiro.palau.net.common.End;
 import com.example.akihiro.palau.net.common.Genre;
 import com.example.akihiro.palau.net.response.item.RankingDetail;
@@ -21,13 +22,15 @@ import java.util.List;
 public class RankingCardRecyclerAdapter extends RecyclerView.Adapter<RankingCardRecyclerAdapter.ViewHolder> {
 
     private Context mContext;
+    private FragmentManager mFragmentManager;
     private List<RankingDetail> mRankingDetails;
 
-    public RankingCardRecyclerAdapter(Context context, List<RankingDetail> rankingDetails) {
+    public RankingCardRecyclerAdapter(Context context, FragmentManager fragmentManager, List<RankingDetail> rankingDetails) {
         super();
 
-        this.mRankingDetails = rankingDetails;
         mContext = context;
+        mFragmentManager = fragmentManager;
+        mRankingDetails = rankingDetails;
     }
 
     @Override
@@ -39,10 +42,9 @@ public class RankingCardRecyclerAdapter extends RecyclerView.Adapter<RankingCard
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
-        RankingDetail rankingDetail = mRankingDetails.get(position);
+        final RankingDetail rankingDetail = mRankingDetails.get(position);
 
         int ranking = rankingDetail.getRank();
-        Log.d("tag", "ranking : " + ranking);
         switch (ranking) {
 
             case 1:
@@ -84,7 +86,12 @@ public class RankingCardRecyclerAdapter extends RecyclerView.Adapter<RankingCard
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(mContext, "press", Toast.LENGTH_SHORT).show();
+                RankingDetailDialogFragment fragment = new RankingDetailDialogFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("test", rankingDetail);
+                fragment.setArguments(bundle);
+
+                fragment.show(mFragmentManager, "tag");
             }
         });
     }
@@ -94,9 +101,8 @@ public class RankingCardRecyclerAdapter extends RecyclerView.Adapter<RankingCard
 
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         View view = layoutInflater.inflate(R.layout.view_ranking_list_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
 
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -110,7 +116,7 @@ public class RankingCardRecyclerAdapter extends RecyclerView.Adapter<RankingCard
         TextView novelInfo;
         TextView novelLastUp;
 
-        public ViewHolder(View v) {
+        ViewHolder(View v) {
 
             super(v);
 

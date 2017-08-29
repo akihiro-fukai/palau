@@ -25,5 +25,13 @@
     <dimen name="ranking_genre_text_size">12sp</dimen>
     <dimen name="ranking_status_text_size">12sp</dimen>
     <dimen name="ranking_last_up_text_size">12sp</dimen>
+    <dimen name="ranking_detail_dialog_margin">16dp</dimen>
+    <dimen name="ranking_detail_dialog_divider_size">2dp</dimen>
+    <dimen name="ranking_detail_dialog_title_margin">10dp</dimen>
+    <dimen name="ranking_detail_dialog_title_text_size">18sp</dimen>
+    <dimen name="ranking_detail_dialog_message_margin">12dp</dimen>
+    <dimen name="ranking_detail_dialog_message_text_size">16sp</dimen>
+    <dimen name="ranking_detail_dialog_close_button_margin">8dp</dimen>
+    <dimen name="ranking_detail_dialog_message_line_space">6dp</dimen>
 
 </resources>

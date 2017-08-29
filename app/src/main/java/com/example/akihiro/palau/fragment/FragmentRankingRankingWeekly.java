@@ -43,7 +43,19 @@ public class FragmentRankingRankingWeekly extends FragmentRankingBase {
         final String inFormat = "yyyyMMdd";
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, -5);
+        int week = calendar.get(Calendar.DAY_OF_WEEK);
+        int lastWeek = 0;
+        if (3 == week) {
+
+            lastWeek = 7;
+        } else if (3 < week) {
+
+            lastWeek = week - 3;
+        } else if (3 > week) {
+
+            lastWeek = 7 - (3 - week);
+        }
+        calendar.add(Calendar.DAY_OF_MONTH, -lastWeek);
 
         return DateFormat.format(inFormat, calendar).toString() + "-w";
     }

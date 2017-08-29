@@ -155,7 +155,10 @@ public abstract class FragmentRankingBase extends FragmentBase {
 
     private void setRankingDetailView(List<RankingDetail> rankingDetails) {
 
-        RankingCardRecyclerAdapter adapter = new RankingCardRecyclerAdapter(getContext(), rankingDetails);
+        RankingCardRecyclerAdapter adapter = new RankingCardRecyclerAdapter(
+                getContext(),
+                getActivity().getSupportFragmentManager(),
+                rankingDetails);
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(getRankingDetailViewId());
         recyclerView.setHasFixedSize(true);
 

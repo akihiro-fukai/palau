@@ -15,11 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.akihiro.palau.R;
-import com.example.akihiro.palau.net.HttpApiClient;
-import com.example.akihiro.palau.net.NetConfig;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -76,6 +71,7 @@ public class NavigationActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
             return true;
         }
 

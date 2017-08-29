@@ -48,7 +48,7 @@ public class FragmentRankingRankingDaily extends FragmentRankingBase {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -1);
 
-        return DateFormat.format(inFormat, calendar).toString();
+        return DateFormat.format(inFormat, calendar).toString() + "-d";
     }
 
     @Override

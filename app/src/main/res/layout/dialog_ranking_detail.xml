@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- コンテンツ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/ranking_detail_dialog_margin"
+        android:layout_marginTop="@dimen/ranking_detail_dialog_margin"
+        android:background="@drawable/dialog_background"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <!-- タイトル -->
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_title_background"
+            android:padding="@dimen/ranking_detail_dialog_title_margin"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/ranking_detail_dialog_title_text_size"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!-- メッセージ -->
+            <TextView
+                android:id="@+id/dialog_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="@dimen/ranking_detail_dialog_message_line_space"
+                android:padding="@dimen/ranking_detail_dialog_message_margin"
+                android:textColor="@color/ranking_detail_dialog_message"
+                android:textSize="@dimen/ranking_detail_dialog_message_text_size" />
+
+        </ScrollView>
+
+        <include layout="@layout/view_ranking_detail_dialog_divider" />
+
+        <Button
+            android:id="@+id/positive_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/ranking_detail_dialog_close_button_margin"
+            android:layout_marginTop="@dimen/ranking_detail_dialog_close_button_margin"
+            android:background="@drawable/dialog_button_positive"
+            android:text="@string/ranking_detail_dialog_close"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#e5ac84</color>
-    <color name="colorPrimaryDark">#dc915b</color>
-    <color name="colorAccent">#dc915b</color>
+    <color name="color_primary">#e5ac84</color>
+    <color name="color_primary_dark">#dc915b</color>
+    <color name="color_accent">#dc915b</color>
 
     <!-- ツールバー -->
-    <color name="colorToolbarTextPrimary">#7e441b</color>
-    <color name="colorToolbarTextSecondary">#7e441b</color>
+    <color name="toolbar_text_primary">#7e441b</color>
+    <color name="toolbar_text_secondary">#7e441b</color>
 
     <!-- ランキング -->
-    <color name="colorRankingTitleText">#7e441b</color>
-    <color name="colorRankingText">#fff</color>
-    <color name="colorRankingTextBackground">#e5ac84</color>
-    <color name="colorRankingWriterText">#6eda83</color>
-    <color name="colorRankingGenreText">#fff</color>
+    <color name="ranking_title_text">#7e441b</color>
+    <color name="ranking_text">#fff</color>
+    <color name="ranking_text_background">#e5ac84</color>
+    <color name="ranking_writer_text">#6eda83</color>
+    <color name="ranking_genre_text">#fff</color>
+    <color name="ranking_detail_dialog_message">#000</color>
+    <color name="ranking_detail_dialog_divider">#7e441b</color>
 </resources>
