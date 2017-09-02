@@ -3,18 +3,22 @@ package com.example.akihiro.palau.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.akihiro.palau.R;
+
+import narou4j.Narou;
+import narou4j.entities.NovelBody;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -72,6 +76,18 @@ public class NavigationActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
+            Thread t = new Thread() {
+
+                @Override
+                public void run() {
+
+                    Narou narou = new Narou();
+                    NovelBody novelBody = narou.getNovelBody("n4202cb", 1);
+
+                    Log.d("d", novelBody.toString());
+                }
+            };
+            t.start();
             return true;
         }
 

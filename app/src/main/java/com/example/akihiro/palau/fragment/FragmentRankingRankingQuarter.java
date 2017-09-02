@@ -1,10 +1,8 @@
 package com.example.akihiro.palau.fragment;
 
-import android.text.format.DateFormat;
-
 import com.example.akihiro.palau.R;
 
-import java.util.Calendar;
+import narou4j.enums.RankingType;
 
 public class FragmentRankingRankingQuarter extends FragmentRankingBase {
 
@@ -24,23 +22,9 @@ public class FragmentRankingRankingQuarter extends FragmentRankingBase {
     // ------------------------------
 
     @Override
-    protected String getRType() {
+    protected RankingType getRType() {
 
-        final String inFormat = "yyyyMM";
-
-        return DateFormat.format(inFormat, Calendar.getInstance()).toString() + "01-q";
-    }
-
-    @Override
-    protected String getRetryRType() {
-
-        return null;
-    }
-
-    @Override
-    protected void onRTypeError() {
-
-        // TODO
+        return RankingType.QUARTET;
     }
 
     // ------------------------------

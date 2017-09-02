@@ -1,7 +1,6 @@
 package com.example.akihiro.palau.net;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,13 +12,13 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.zip.GZIPInputStream;
 
-public class HttpNarouApiClient extends AsyncTask<String, Void, String> {
+public class AsyncNarouApiClient extends AsyncTask<String, Void, String> {
 
     private static final int READ_TIMEOUT = 1000;
     private static final int CONNECT_TIMEOUT = 3000;
     private static final String GET = "GET";
 
-    private OnHttpApiListener mOnHttpApiListener;
+    private OnHttpApiListener mListener;
 
     @Override
     protected String doInBackground(String... urls) {
@@ -131,15 +130,15 @@ public class HttpNarouApiClient extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
 
-        if (null != mOnHttpApiListener) {
+        if (null != mListener) {
 
-            mOnHttpApiListener.onPostExecute(result);
+            mListener.onPostExecute(result);
         }
     }
 
     public void setOnHttpApiListener(OnHttpApiListener listener) {
 
-        mOnHttpApiListener = listener;
+        mListener = listener;
     }
 
     public interface OnHttpApiListener {

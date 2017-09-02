@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.akihiro.palau.net.HttpNarouApiClient;
+import com.example.akihiro.palau.net.AsyncNarouApiClient;
 import com.example.akihiro.palau.net.common.RequestParam;
 import com.example.akihiro.palau.net.common.RequestType;
 
@@ -46,12 +46,12 @@ public abstract class FragmentBase extends Fragment {
             }
         }
 
-        HttpNarouApiClient httpNarouApiClient = new HttpNarouApiClient();
+        AsyncNarouApiClient httpNarouApiClient = new AsyncNarouApiClient();
         httpNarouApiClient.setOnHttpApiListener(mOnHttpApiListener);
         httpNarouApiClient.execute(stringBuilder.toString());
     }
 
-    private HttpNarouApiClient.OnHttpApiListener mOnHttpApiListener = new HttpNarouApiClient.OnHttpApiListener() {
+    private AsyncNarouApiClient.OnHttpApiListener mOnHttpApiListener = new AsyncNarouApiClient.OnHttpApiListener() {
 
         @Override
         public void onPostExecute(String result) {

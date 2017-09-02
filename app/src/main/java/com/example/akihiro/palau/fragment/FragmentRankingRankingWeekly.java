@@ -1,10 +1,8 @@
 package com.example.akihiro.palau.fragment;
 
-import android.text.format.DateFormat;
-
 import com.example.akihiro.palau.R;
 
-import java.util.Calendar;
+import narou4j.enums.RankingType;
 
 public class FragmentRankingRankingWeekly extends FragmentRankingBase {
 
@@ -24,45 +22,9 @@ public class FragmentRankingRankingWeekly extends FragmentRankingBase {
     // ------------------------------
 
     @Override
-    protected String getRType() {
+    protected RankingType getRType() {
 
-        final String inFormat = "yyyyMMdd";
-
-        return DateFormat.format(inFormat, Calendar.getInstance()).toString() + "-w";
-    }
-
-    @Override
-    protected String getRetryRType() {
-
-        if (mIsRetryRTypeRequest) {
-
-            return null;
-        }
-        mIsRetryRTypeRequest = true;
-
-        final String inFormat = "yyyyMMdd";
-
-        Calendar calendar = Calendar.getInstance();
-        int week = calendar.get(Calendar.DAY_OF_WEEK);
-        int lastWeek = 0;
-        if (3 == week) {
-
-            lastWeek = 7;
-        } else if (3 < week) {
-
-            lastWeek = week - 3;
-        } else if (3 > week) {
-
-            lastWeek = 7 - (3 - week);
-        }
-        calendar.add(Calendar.DAY_OF_MONTH, -lastWeek);
-
-        return DateFormat.format(inFormat, calendar).toString() + "-w";
-    }
-
-    @Override
-    protected void onRTypeError() {
-
+        return RankingType.WEEKLY;
     }
 
     // ------------------------------

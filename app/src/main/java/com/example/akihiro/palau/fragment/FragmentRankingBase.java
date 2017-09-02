@@ -6,12 +6,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.akihiro.palau.adapter.RankingCardRecyclerAdapter;
+import com.example.akihiro.palau.net.AsyncNarouRankingApiClient;
 import com.example.akihiro.palau.net.NetConfig;
 import com.example.akihiro.palau.net.common.RequestParam;
 import com.example.akihiro.palau.net.common.RequestType;
 import com.example.akihiro.palau.net.response.RankingDetailResponse;
-import com.example.akihiro.palau.net.response.RankingResponse;
-import com.example.akihiro.palau.net.response.item.Ranking;
 import com.example.akihiro.palau.net.response.item.RankingDetail;
 import com.example.akihiro.palau.parser.JsonParser;
 
@@ -20,14 +19,15 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
+import narou4j.entities.NovelRank;
+import narou4j.enums.RankingType;
+
 import static com.example.akihiro.palau.net.common.RequestParam.GZIP;
 import static com.example.akihiro.palau.net.common.RequestParam.LIMIT;
 import static com.example.akihiro.palau.net.common.RequestParam.NCODE;
-import static com.example.akihiro.palau.net.common.RequestParam.RTYPE;
 import static com.example.akihiro.palau.net.common.RequestType.RANKING_DETAIL;
-import static com.example.akihiro.palau.net.common.RequestType.RANKING_MONTHLY;
 
-public abstract class FragmentRankingBase extends FragmentBase {
+public abstract class FragmentRankingBase extends FragmentBase implements AsyncNarouRankingApiClient.OnNarouRankingApiListener {
 
     private HashMap<String, Integer> mRankingMap = new HashMap<>();
     private List<RankingDetail> mRankingDetails;
@@ -42,9 +42,7 @@ public abstract class FragmentRankingBase extends FragmentBase {
             setRankingDetailView(mRankingDetails);
         } else {
 
-            String rType = getRType();
-
-            requestRanking(rType);
+            requestRanking(getRType());
         }
     }
 
@@ -52,25 +50,57 @@ public abstract class FragmentRankingBase extends FragmentBase {
     // 通信要求
     // ------------------------------
 
-    protected void requestRanking(String rType) {
+    // ------------------------------
+    // ランキング取得
+    // ------------------------------
 
-        HashMap<RequestParam, String> params = new HashMap<>();
-        params.put(GZIP, "5");
-        params.put(RTYPE, rType);
+    /**
+     * ランキングを取得します。
+     *
+     * @param rType ランキングの項目
+     */
+    private void requestRanking(RankingType rType) {
 
-        httpRequest(NetConfig.RANK_HOST, params, RANKING_MONTHLY);
+        AsyncNarouRankingApiClient client = new AsyncNarouRankingApiClient();
+        client.setOnNarouRankingApiListener(this);
+        client.execute(rType);
     }
 
-    protected void requestRankingDailyDetail(List<Ranking> rankings) {
+    @Override
+    public void onSuccess(List<NovelRank> novelRanks) {
+
+        for (NovelRank novelRank : novelRanks) {
+
+            mRankingMap.put(novelRank.getNcode(), novelRank.getRank());
+        }
+
+        requestRankingDetail(novelRanks);
+    }
+
+    @Override
+    public void onConnectedError() {
+
+    }
+
+    // ------------------------------
+    // ランキング詳細取得
+    // ------------------------------
+
+    /**
+     * ランキングのNコードを指定して詳細情報を取得します。
+     *
+     * @param novelRanks ランキング情報
+     */
+    private void requestRankingDetail(List<NovelRank> novelRanks) {
 
         HashMap<RequestParam, String> params = new HashMap<>();
         params.put(GZIP, "5");
-        params.put(LIMIT, String.valueOf(rankings.size()));
+        params.put(LIMIT, String.valueOf(novelRanks.size()));
 
         StringBuilder stringBuilder = new StringBuilder("");
-        for (Ranking ranking : rankings) {
+        for (NovelRank novelRank : novelRanks) {
 
-            String nCode = ranking.getNCode();
+            String nCode = novelRank.getNcode();
             if (!stringBuilder.toString().isEmpty()) {
 
                 stringBuilder.append("-");
@@ -87,16 +117,11 @@ public abstract class FragmentRankingBase extends FragmentBase {
 
         switch (type) {
 
-            case RANKING_DAILY:
-            case RANKING_WEEKLY:
-            case RANKING_MONTHLY:
-            case RANKING_QUARTER:
-
-                handleRanking(result);
-                break;
             case RANKING_DETAIL:
 
                 handleRankingDetail(result);
+                break;
+            default:
                 break;
         }
     }
@@ -104,33 +129,6 @@ public abstract class FragmentRankingBase extends FragmentBase {
     // ------------------------------
     // 初期化
     // ------------------------------
-
-    private void handleRanking(String result) {
-
-        if (null != result && !result.isEmpty()) {
-
-            RankingResponse rankingResponse = JsonParser.parseRanking(result);
-
-            List<Ranking> rankings = rankingResponse.getRankinItems();
-            for (Ranking ranking : rankings) {
-
-                mRankingMap.put(ranking.getNCode(), ranking.getRank());
-            }
-
-            requestRankingDailyDetail(rankings);
-        } else {
-
-            String rType = getRetryRType();
-            if (null == rType) {
-
-                onRTypeError();
-
-                return;
-            }
-
-            requestRanking(rType);
-        }
-    }
 
     private void handleRankingDetail(String result) {
 
@@ -150,6 +148,9 @@ public abstract class FragmentRankingBase extends FragmentBase {
             mRankingDetails = rankingDetails;
 
             setRankingDetailView(rankingDetails);
+        } else {
+
+            // TODO json解析失敗：エラーハンドリング
         }
     }
 
@@ -191,9 +192,5 @@ public abstract class FragmentRankingBase extends FragmentBase {
 
     protected abstract int getRankingDetailViewId();
 
-    protected abstract String getRType();
-
-    protected abstract String getRetryRType();
-
-    protected abstract void onRTypeError();
+    protected abstract RankingType getRType();
 }
