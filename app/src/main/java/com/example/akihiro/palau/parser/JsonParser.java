@@ -3,7 +3,7 @@ package com.example.akihiro.palau.parser;
 import com.example.akihiro.palau.net.response.RankingDetailResponse;
 import com.example.akihiro.palau.net.response.RankingResponse;
 import com.example.akihiro.palau.net.response.item.Ranking;
-import com.example.akihiro.palau.net.response.item.RankingDetail;
+import com.example.akihiro.palau.net.response.item.NovelDetail;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -71,42 +71,42 @@ public class JsonParser {
                     continue;
                 }
 
-                RankingDetail rankingDetail = new RankingDetail();
-                rankingDetail.setTitle(data.getString("title"));
-                rankingDetail.setNCode(data.getString("ncode"));
-                rankingDetail.setUserId(data.getInt("userid"));
-                rankingDetail.setWriter(data.getString("writer"));
-                rankingDetail.setStory(data.getString("story"));
-                rankingDetail.setBigGenre(data.getInt("biggenre"));
-                rankingDetail.setGenre(data.getInt("genre"));
-                rankingDetail.setGensaku(data.getString("gensaku"));
-                rankingDetail.setKeyword(data.getString("keyword"));
-                rankingDetail.setGeneralFirstup(data.getString("general_firstup"));
-                rankingDetail.setGeneralLastup(data.getString("general_lastup"));
-                rankingDetail.setNovelType(data.getInt("novel_type"));
-                rankingDetail.setEnd(data.getInt("end"));
-                rankingDetail.setGeneralAllNo(data.getInt("general_all_no"));
-                rankingDetail.setLength(data.getInt("length"));
-                rankingDetail.setTime(data.getInt("time"));
-                rankingDetail.setIsStop(data.getInt("isstop"));
-                rankingDetail.setIsR15(data.getInt("isr15"));
-                rankingDetail.setIsBL(data.getInt("isbl"));
-                rankingDetail.setIsGL(data.getInt("isgl"));
-                rankingDetail.setIsZankoku(data.getInt("iszankoku"));
-                rankingDetail.setIsTensei(data.getInt("istensei"));
-                rankingDetail.setIsTenni(data.getInt("istenni"));
-                rankingDetail.setPcOrK(data.getInt("pc_or_k"));
-                rankingDetail.setGlobalPoint(data.getInt("global_point"));
-                rankingDetail.setFavNovelCnt(data.getInt("fav_novel_cnt"));
-                rankingDetail.setReviewCnt(data.getInt("review_cnt"));
-                rankingDetail.setAllPoint(data.getInt("all_point"));
-                rankingDetail.setAllHyokaCnt(data.getInt("all_hyoka_cnt"));
-                rankingDetail.setSasieCnt(data.getInt("sasie_cnt"));
-                rankingDetail.setKaiwaritu(data.getInt("kaiwaritu"));
-                rankingDetail.setNovelUpdatedAt(data.getString("novelupdated_at"));
-                rankingDetail.setUpdatedAt(data.getString("updated_at"));
+                NovelDetail novelDetail = new NovelDetail();
+                novelDetail.setTitle(data.getString("title"));
+                novelDetail.setNCode(data.getString("ncode"));
+                novelDetail.setUserId(data.getInt("userid"));
+                novelDetail.setWriter(data.getString("writer"));
+                novelDetail.setStory(data.getString("story"));
+                novelDetail.setBigGenre(data.getInt("biggenre"));
+                novelDetail.setGenre(data.getInt("genre"));
+                novelDetail.setGensaku(data.getString("gensaku"));
+                novelDetail.setKeyword(data.getString("keyword"));
+                novelDetail.setGeneralFirstup(data.getString("general_firstup"));
+                novelDetail.setGeneralLastup(data.getString("general_lastup"));
+                novelDetail.setNovelType(data.getInt("novel_type"));
+                novelDetail.setEnd(data.getInt("end"));
+                novelDetail.setGeneralAllNo(data.getInt("general_all_no"));
+                novelDetail.setLength(data.getInt("length"));
+                novelDetail.setTime(data.getInt("time"));
+                novelDetail.setIsStop(data.getInt("isstop"));
+                novelDetail.setIsR15(data.getInt("isr15"));
+                novelDetail.setIsBL(data.getInt("isbl"));
+                novelDetail.setIsGL(data.getInt("isgl"));
+                novelDetail.setIsZankoku(data.getInt("iszankoku"));
+                novelDetail.setIsTensei(data.getInt("istensei"));
+                novelDetail.setIsTeni(data.getInt("istenni"));
+                novelDetail.setPcOrK(data.getInt("pc_or_k"));
+                novelDetail.setGlobalPoint(data.getInt("global_point"));
+                novelDetail.setFavNovelCnt(data.getInt("fav_novel_cnt"));
+                novelDetail.setReviewCnt(data.getInt("review_cnt"));
+                novelDetail.setAllPoint(data.getInt("all_point"));
+                novelDetail.setAllHyokaCnt(data.getInt("all_hyoka_cnt"));
+                novelDetail.setSasieCnt(data.getInt("sasie_cnt"));
+                novelDetail.setKaiwaritu(data.getInt("kaiwaritu"));
+                novelDetail.setNovelUpdatedAt(data.getString("novelupdated_at"));
+                novelDetail.setUpdatedAt(data.getString("updated_at"));
 
-                rankingDetailResponse.setRankingDetails(rankingDetail);
+                rankingDetailResponse.setNovelDetails(novelDetail);
             }
         } catch (JSONException e) {
 

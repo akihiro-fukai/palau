@@ -3,6 +3,6 @@
 
     <corners android:topLeftRadius="5dp" android:topRightRadius="5dp"/>
 
-    <solid android:color="#7e441b"/>
+    <solid android:color="@color/dialog_title_background"/>
 
 </shape>

@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">#e5ac84</color>
-    <color name="color_primary_dark">#dc915b</color>
-    <color name="color_accent">#dc915b</color>
+    <color name="color_primary">#c7ddae</color>
+    <color name="color_primary_dark">#adc394</color>
+    <color name="color_accent">#c7ddae</color>
 
     <!-- ツールバー -->
-    <color name="toolbar_text_primary">#7e441b</color>
-    <color name="toolbar_text_secondary">#7e441b</color>
+    <color name="toolbar_text_primary">#fff</color>
+    <color name="toolbar_text_secondary">#fff</color>
+
+    <!-- ダイアログ -->
+    <color name="dialog_button_primary">#c7ddae</color>
+    <color name="dialog_button_primary_dark">#e1f7c8</color>
+    <color name="dialog_title_background">#c7ddae</color>
+    <color name="dialog_divider">#c7ddae</color>
+    <color name="dialog_frame">#c7ddae</color>
 
     <!-- ランキング -->
-    <color name="ranking_title_text">#7e441b</color>
+    <color name="ranking_title_text">#d5a87f</color>
     <color name="ranking_text">#fff</color>
-    <color name="ranking_text_background">#e5ac84</color>
-    <color name="ranking_writer_text">#6eda83</color>
+    <color name="ranking_text_background">#c7ddae</color>
+    <color name="ranking_writer_text">#adc394</color>
     <color name="ranking_genre_text">#fff</color>
     <color name="ranking_detail_dialog_message">#000</color>
-    <color name="ranking_detail_dialog_divider">#7e441b</color>
 </resources>

@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.akihiro.palau.R;
+import com.example.akihiro.palau.database.NarouDao;
 
 import narou4j.Narou;
 import narou4j.entities.NovelBody;
@@ -76,18 +77,6 @@ public class NavigationActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
-            Thread t = new Thread() {
-
-                @Override
-                public void run() {
-
-                    Narou narou = new Narou();
-                    NovelBody novelBody = narou.getNovelBody("n4202cb", 1);
-
-                    Log.d("d", novelBody.toString());
-                }
-            };
-            t.start();
             return true;
         }
 

@@ -2,4 +2,4 @@
 <View xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/ranking_detail_dialog_divider_size"
-    android:background="@color/ranking_detail_dialog_divider" />
+    android:background="@color/dialog_divider" />

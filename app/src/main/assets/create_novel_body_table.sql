@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS novel_body (_id integer primary key autoincrement, novel_id integer, page integer, title text, novel_body mediumtext);

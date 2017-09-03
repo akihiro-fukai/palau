@@ -11,7 +11,7 @@ import com.example.akihiro.palau.net.NetConfig;
 import com.example.akihiro.palau.net.common.RequestParam;
 import com.example.akihiro.palau.net.common.RequestType;
 import com.example.akihiro.palau.net.response.RankingDetailResponse;
-import com.example.akihiro.palau.net.response.item.RankingDetail;
+import com.example.akihiro.palau.net.response.item.NovelDetail;
 import com.example.akihiro.palau.parser.JsonParser;
 
 import java.util.Collections;
@@ -30,16 +30,16 @@ import static com.example.akihiro.palau.net.common.RequestType.RANKING_DETAIL;
 public abstract class FragmentRankingBase extends FragmentBase implements AsyncNarouRankingApiClient.OnNarouRankingApiListener {
 
     private HashMap<String, Integer> mRankingMap = new HashMap<>();
-    private List<RankingDetail> mRankingDetails;
+    private List<NovelDetail> mNovelDetails;
     protected boolean mIsRetryRTypeRequest;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (null != mRankingDetails) {
+        if (null != mNovelDetails) {
 
-            setRankingDetailView(mRankingDetails);
+            setRankingDetailView(mNovelDetails);
         } else {
 
             requestRanking(getRType());
@@ -135,31 +135,31 @@ public abstract class FragmentRankingBase extends FragmentBase implements AsyncN
         RankingDetailResponse rankingDetailResponse = JsonParser.parseRankingDetail(result);
         if (null != rankingDetailResponse) {
 
-            List<RankingDetail> rankingDetails = rankingDetailResponse.getRankingDetails();
+            List<NovelDetail> novelDetails = rankingDetailResponse.getNovelDetails();
 
-            for (RankingDetail rankingDetail : rankingDetails) {
+            for (NovelDetail novelDetail : novelDetails) {
 
-                if (mRankingMap.containsKey(rankingDetail.getNCode())) {
+                if (mRankingMap.containsKey(novelDetail.getNCode())) {
 
-                    rankingDetail.setRank(mRankingMap.get(rankingDetail.getNCode()));
+                    novelDetail.setRank(mRankingMap.get(novelDetail.getNCode()));
                 }
             }
-            sortAsc(rankingDetails);
-            mRankingDetails = rankingDetails;
+            sortAsc(novelDetails);
+            mNovelDetails = novelDetails;
 
-            setRankingDetailView(rankingDetails);
+            setRankingDetailView(novelDetails);
         } else {
 
             // TODO json解析失敗：エラーハンドリング
         }
     }
 
-    private void setRankingDetailView(List<RankingDetail> rankingDetails) {
+    private void setRankingDetailView(List<NovelDetail> novelDetails) {
 
         RankingCardRecyclerAdapter adapter = new RankingCardRecyclerAdapter(
                 getContext(),
                 getActivity().getSupportFragmentManager(),
-                rankingDetails);
+                novelDetails);
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(getRankingDetailViewId());
         recyclerView.setHasFixedSize(true);
 
@@ -168,11 +168,11 @@ public abstract class FragmentRankingBase extends FragmentBase implements AsyncN
         recyclerView.setAdapter(adapter);
     }
 
-    protected static void sortAsc(List<RankingDetail> rankingDetails) {
+    protected static void sortAsc(List<NovelDetail> novelDetails) {
 
-        Collections.sort(rankingDetails, new Comparator<RankingDetail>() {
+        Collections.sort(novelDetails, new Comparator<NovelDetail>() {
 
-            public int compare(RankingDetail o1, RankingDetail o2) {
+            public int compare(NovelDetail o1, NovelDetail o2) {
 
                 if (o1.getRank() < o2.getRank()) {
 

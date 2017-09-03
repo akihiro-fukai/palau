@@ -3,7 +3,7 @@ package com.example.akihiro.palau.net.response.item;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class RankingDetail implements Parcelable {
+public class NovelDetail implements Parcelable {
 
     /**
      * 小説名
@@ -96,7 +96,7 @@ public class RankingDetail implements Parcelable {
     /**
      * 登録必須キーワードに「異世界転移」が含まれる場合は1、それ以外は0です。
      */
-    private int isTenni;
+    private int isTeni;
     /**
      * 1はケータイのみ、2はPCのみ、3はPCとケータイで投稿された作品です。<br/>
      * 対象は投稿と次話投稿時のみで、どの端末で執筆されたかを表すものではありません。
@@ -144,7 +144,7 @@ public class RankingDetail implements Parcelable {
      */
     private int rank;
 
-    private RankingDetail(Parcel in) {
+    private NovelDetail(Parcel in) {
         title = in.readString();
         nCode = in.readString();
         userId = in.readInt();
@@ -167,7 +167,7 @@ public class RankingDetail implements Parcelable {
         isGL = in.readInt();
         isZankoku = in.readInt();
         isTensei = in.readInt();
-        isTenni = in.readInt();
+        isTeni = in.readInt();
         pcOrK = in.readInt();
         globalPoint = in.readInt();
         favNovelCnt = in.readInt();
@@ -181,19 +181,19 @@ public class RankingDetail implements Parcelable {
         rank = in.readInt();
     }
 
-    public static final Creator<RankingDetail> CREATOR = new Creator<RankingDetail>() {
+    public static final Creator<NovelDetail> CREATOR = new Creator<NovelDetail>() {
         @Override
-        public RankingDetail createFromParcel(Parcel in) {
-            return new RankingDetail(in);
+        public NovelDetail createFromParcel(Parcel in) {
+            return new NovelDetail(in);
         }
 
         @Override
-        public RankingDetail[] newArray(int size) {
-            return new RankingDetail[size];
+        public NovelDetail[] newArray(int size) {
+            return new NovelDetail[size];
         }
     };
 
-    public RankingDetail() {
+    public NovelDetail() {
 
     }
 
@@ -373,12 +373,12 @@ public class RankingDetail implements Parcelable {
         this.isTensei = isTensei;
     }
 
-    public int getIsTenni() {
-        return isTenni;
+    public int getIsTeni() {
+        return isTeni;
     }
 
-    public void setIsTenni(int isTenni) {
-        this.isTenni = isTenni;
+    public void setIsTeni(int isTeni) {
+        this.isTeni = isTeni;
     }
 
     public int getPcOrK() {
@@ -498,7 +498,7 @@ public class RankingDetail implements Parcelable {
         dest.writeInt(isGL);
         dest.writeInt(isZankoku);
         dest.writeInt(isTensei);
-        dest.writeInt(isTenni);
+        dest.writeInt(isTeni);
         dest.writeInt(pcOrK);
         dest.writeInt(globalPoint);
         dest.writeInt(favNovelCnt);

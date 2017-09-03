@@ -1,19 +1,19 @@
 package com.example.akihiro.palau.net.response;
 
-import com.example.akihiro.palau.net.response.item.RankingDetail;
+import com.example.akihiro.palau.net.response.item.NovelDetail;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RankingDetailResponse {
 
-    private List<RankingDetail> rankingDetails = new ArrayList<>();
+    private List<NovelDetail> novelDetails = new ArrayList<>();
 
-    public List<RankingDetail> getRankingDetails() {
-        return rankingDetails;
+    public List<NovelDetail> getNovelDetails() {
+        return novelDetails;
     }
 
-    public void setRankingDetails(RankingDetail rankingDetail) {
-        this.rankingDetails.add(rankingDetail);
+    public void setNovelDetails(NovelDetail novelDetail) {
+        this.novelDetails.add(novelDetail);
     }
 }
