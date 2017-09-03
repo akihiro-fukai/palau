@@ -21,13 +21,13 @@ import java.util.List;
 
 import static com.example.akihiro.palau.common.UICommonUtil.BUNDLE_NNOVEL_DETAIL;
 
-public class TopPageCardRecyclerAdapter extends RecyclerView.Adapter<TopPageCardRecyclerAdapter.ViewHolder> {
+public class RankingListAdapter extends RecyclerView.Adapter<RankingListAdapter.ViewHolder> {
 
     private Context mContext;
     private FragmentManager mFragmentManager;
     private List<NovelDetail> mNovelDetails;
 
-    public TopPageCardRecyclerAdapter(Context context, FragmentManager fragmentManager, List<NovelDetail> novelDetails) {
+    public RankingListAdapter(Context context, FragmentManager fragmentManager, List<NovelDetail> novelDetails) {
         super();
 
         mContext = context;
@@ -99,7 +99,7 @@ public class TopPageCardRecyclerAdapter extends RecyclerView.Adapter<TopPageCard
     }
 
     @Override
-    public TopPageCardRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RankingListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         View view = layoutInflater.inflate(R.layout.view_ranking_list_item, parent, false);

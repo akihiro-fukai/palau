@@ -15,6 +15,13 @@
     <!-- CardView余白 -->
     <dimen name="card_view_margin">10dp</dimen>
 
+    <!-- トップページ -->
+    <dimen name="top_page_title_text_size">16sp</dimen>
+    <dimen name="top_page_writer_text_size">12sp</dimen>
+    <dimen name="top_page_genre_text_size">12sp</dimen>
+    <dimen name="top_page_status_text_size">12sp</dimen>
+    <dimen name="top_page_last_up_text_size">12sp</dimen>
+
     <!-- ランキング -->
     <dimen name="ranking_title_text_size">16sp</dimen>
     <dimen name="ranking_crown_image_size">16dp</dimen>

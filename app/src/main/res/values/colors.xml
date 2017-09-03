@@ -15,6 +15,10 @@
     <color name="dialog_divider">#c7ddae</color>
     <color name="dialog_frame">#c7ddae</color>
 
+    <!-- トップページ -->
+    <color name="top_page_title_text">#d5a87f</color>
+    <color name="top_page_writer_text">#adc394</color>
+
     <!-- ランキング -->
     <color name="ranking_title_text">#d5a87f</color>
     <color name="ranking_text">#fff</color>

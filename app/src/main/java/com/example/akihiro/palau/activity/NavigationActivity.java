@@ -1,5 +1,7 @@
 package com.example.akihiro.palau.activity;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,16 +12,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.akihiro.palau.R;
-import com.example.akihiro.palau.database.NarouDao;
-
-import narou4j.Narou;
-import narou4j.entities.NovelBody;
+import com.example.akihiro.palau.fragment.FragmentTopPage;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,6 +31,7 @@ public class NavigationActivity extends AppCompatActivity
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -48,6 +47,16 @@ public class NavigationActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // --------------------
+        // フラグメント初期化
+        // --------------------
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        FragmentTopPage fragmentTopPage = new FragmentTopPage();
+        fragmentTransaction.add(R.id.fragment_container, fragmentTopPage);
+        fragmentTransaction.commit();
     }
 
     @Override

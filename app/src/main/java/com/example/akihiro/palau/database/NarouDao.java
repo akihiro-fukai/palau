@@ -64,10 +64,11 @@ public class NarouDao {
      */
     public synchronized long insert(NovelDetail novelDetail) {
 
-        if (-1 == isExistByNCode(novelDetail.getNCode())) {
+        int novelId = getExistByNCode(novelDetail.getNCode());
+        if (-1 != novelId) {
 
             // TODO 登録済みのNコード
-            return -1;
+            return novelId;
         }
 
         SQLiteDatabase db = mHelper.getWritableDatabase();
@@ -122,7 +123,7 @@ public class NarouDao {
      */
     public synchronized void insert(List<NovelBody> novelBodies, String nCode) {
 
-        int novelId = isExistByNCode(nCode);
+        int novelId = getExistByNCode(nCode);
         if (-1 == novelId) {
 
             return;
@@ -153,7 +154,7 @@ public class NarouDao {
      * @param ncode Nコード
      * @return novelテーブルのID
      */
-    private int isExistByNCode(String ncode) {
+    private synchronized int getExistByNCode(String ncode) {
 
         SQLiteDatabase db = mHelper.getReadableDatabase();
 
@@ -191,7 +192,7 @@ public class NarouDao {
      * @param nCode Nコード
      * @return 小説の基本情報
      */
-    public NovelDetail findNovelDetailByNCode(String nCode) {
+    public synchronized NovelDetail findNovelDetailByNCode(String nCode) {
 
         SQLiteDatabase db = mHelper.getReadableDatabase();
 
@@ -258,7 +259,7 @@ public class NarouDao {
      *
      * @return 登録済み小説の基本情報
      */
-    public List<NovelDetail> findAllNovelDetail() {
+    public synchronized List<NovelDetail> findAllNovelDetail() {
 
         SQLiteDatabase db = mHelper.getReadableDatabase();
 
@@ -322,5 +323,54 @@ public class NarouDao {
         db.close();
 
         return novelDetails;
+    }
+
+    /**
+     * 登録済み小説の基本情報を全て取得します。
+     *
+     * @return 登録済み小説の基本情報
+     */
+    public synchronized List<NovelBody> findNovelBodyByNCode(String nCode) {
+
+        int novelId = getExistByNCode(nCode);
+        if (-1 == novelId) {
+
+            return null;
+        }
+
+        SQLiteDatabase db = mHelper.getReadableDatabase();
+
+        String selection = NarouContract.NovelBody.COLUMN_NAME_NOVEL_ID + " = ?";
+        String[] selectionArgs = { String.valueOf(novelId) };
+        Cursor cursor = db.query(
+                NarouContract.NovelBody.TABLE_NAME,           // The table to query
+                null,                             // The columns to return
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
+                null,                            // don't group the rows
+                null,                             // don't filter by row groups
+                null                             // The sort order
+        );
+
+        List<NovelBody> novelBodies = null;
+        if (null != cursor && cursor.getCount() > 0) {
+
+            novelBodies = new ArrayList<>();
+
+            for (boolean next = cursor.moveToFirst(); next; next = cursor.moveToNext()) {
+
+                NovelBody novelBody = new NovelBody();
+
+                novelBody.setTitle(cursor.getString(cursor.getColumnIndex(NarouContract.NovelBody.COLUMN_NAME_TITLE)));
+                novelBody.setPage(cursor.getInt(cursor.getColumnIndex(NarouContract.NovelBody.COLUMN_NAME_PAGE)));
+                novelBody.setBody(cursor.getString(cursor.getColumnIndex(NarouContract.NovelBody.COLUMN_NAME_NOVEL_BODY)));
+
+                novelBodies.add(novelBody);
+            }
+            cursor.close();
+        }
+        db.close();
+
+        return novelBodies;
     }
 }

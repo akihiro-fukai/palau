@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.akihiro.palau.adapter.RankingCardRecyclerAdapter;
+import com.example.akihiro.palau.adapter.RankingListAdapter;
 import com.example.akihiro.palau.net.AsyncNarouRankingApiClient;
 import com.example.akihiro.palau.net.NetConfig;
 import com.example.akihiro.palau.net.common.RequestParam;
@@ -31,7 +31,6 @@ public abstract class FragmentRankingBase extends FragmentBase implements AsyncN
 
     private HashMap<String, Integer> mRankingMap = new HashMap<>();
     private List<NovelDetail> mNovelDetails;
-    protected boolean mIsRetryRTypeRequest;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -156,16 +155,19 @@ public abstract class FragmentRankingBase extends FragmentBase implements AsyncN
 
     private void setRankingDetailView(List<NovelDetail> novelDetails) {
 
-        RankingCardRecyclerAdapter adapter = new RankingCardRecyclerAdapter(
+        RankingListAdapter adapter = new RankingListAdapter(
                 getContext(),
                 getActivity().getSupportFragmentManager(),
                 novelDetails);
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(getRankingDetailViewId());
-        recyclerView.setHasFixedSize(true);
+        if (null != recyclerView) {
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+            recyclerView.setHasFixedSize(true);
+
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(adapter);
+        }
     }
 
     protected static void sortAsc(List<NovelDetail> novelDetails) {
