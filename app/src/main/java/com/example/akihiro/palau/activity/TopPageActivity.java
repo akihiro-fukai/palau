@@ -49,6 +49,11 @@ public class TopPageActivity extends NavigationActivity {
 
         switch (id) {
 
+            // トップ
+            case R.id.nav_novel_top:
+
+                onClickHome();
+                break;
             // ランキング
             case R.id.nav_novel_rank:
 
@@ -62,6 +67,15 @@ public class TopPageActivity extends NavigationActivity {
     // ------------------------------
     // クリックイベント
     // ------------------------------
+
+    /**
+     * トップを表示します。
+     */
+    private void onClickHome() {
+
+        DownloadListFragment downloadListFragment = new DownloadListFragment();
+        replace(downloadListFragment);
+    }
 
     /**
      * ランキングを表示します。

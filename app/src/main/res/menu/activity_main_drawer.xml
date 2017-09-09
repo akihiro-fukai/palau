@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+    <!-- 小説を読む -->
+    <item android:title="@string/nav_read_novel">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_novel_top"
+                    android:icon="@drawable/ic_home_white_24dp"
+                    android:title="@string/nav_novel_top" />
+            </group>
+        </menu>
+    </item>
+
     <item android:title="@string/nav_search_novel">
         <menu>
-            <item
-                android:id="@+id/nav_novel_search"
-                android:icon="@drawable/ic_search_black_36dp"
-                android:title="@string/nav_novel_search" />
-            <item
-                android:id="@+id/nav_novel_rank"
-                android:icon="@drawable/ic_list_black_36dp"
-                android:title="@string/nav_novel_rank" />
-            <item
-                android:id="@+id/nav_novel_recommended"
-                android:icon="@drawable/ic_list_black_36dp"
-                android:title="@string/nav_novel_recommended" />
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_novel_search"
+                    android:icon="@drawable/ic_search_white_24dp"
+                    android:title="@string/nav_novel_search" />
+                <item
+                    android:id="@+id/nav_novel_rank"
+                    android:icon="@drawable/ic_format_list_numbered_white_24dp"
+                    android:title="@string/nav_novel_rank" />
+                <item
+                    android:id="@+id/nav_novel_recommended"
+                    android:icon="@drawable/ic_format_list_numbered_white_24dp"
+                    android:title="@string/nav_novel_recommended" />
+            </group>
         </menu>
     </item>
 

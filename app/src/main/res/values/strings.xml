@@ -7,7 +7,9 @@
     <string name="action_settings">Settings</string>
 
     <!-- メニュー -->
+    <string name="nav_read_novel">小説を読む</string>
     <string name="nav_search_novel">小説を探す</string>
+    <string name="nav_novel_top">トップ</string>
     <string name="nav_novel_rank">ランキング</string>
     <string name="nav_novel_search">検索</string>
     <string name="nav_novel_recommended">おすすめ</string>

@@ -8,6 +8,10 @@
     <color name="toolbar_text_primary">#69635d</color>
     <color name="toolbar_text_secondary">#69635d</color>
 
+    <!-- ツールバー -->
+    <color name="navigation_item_default">#696969</color>
+    <color name="navigation_item_checked">#228b22</color>
+
     <!-- ダイアログ -->
     <color name="dialog_button_primary">#c7ddae</color>
     <color name="dialog_button_primary_dark">#e1f7c8</color>
