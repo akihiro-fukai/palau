@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.akihiro.palau.fragment.FragmentNovelBody;
+import com.example.akihiro.palau.fragment.NovelBodyFragment;
 
 import java.util.List;
 
@@ -33,10 +33,10 @@ public class NovelPagePagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        FragmentNovelBody fragmentNovelBody = new FragmentNovelBody();
-        fragmentNovelBody.setNovelBody(mNovelBodies.get(position));
+        NovelBodyFragment novelBodyFragment = new NovelBodyFragment();
+        novelBodyFragment.setNovelBody(mNovelBodies.get(position));
 
-        return fragmentNovelBody;
+        return novelBodyFragment;
     }
 
     @Override

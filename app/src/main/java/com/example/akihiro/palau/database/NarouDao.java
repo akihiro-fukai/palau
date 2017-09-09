@@ -62,7 +62,7 @@ public class NarouDao {
      *
      * @param novelDetail 小説の基本情報
      */
-    public synchronized long insert(NovelDetail novelDetail) {
+    public long insert(NovelDetail novelDetail) {
 
         int novelId = getExistByNCode(novelDetail.getNCode());
         if (-1 != novelId) {
@@ -73,42 +73,53 @@ public class NarouDao {
 
         SQLiteDatabase db = mHelper.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_NAME_TITLE, novelDetail.getTitle());
-        values.put(COLUMN_NAME_N_CODE, novelDetail.getNCode());
-        values.put(COLUMN_NAME_USER_ID, novelDetail.getUserId());
-        values.put(COLUMN_NAME_WRITER, novelDetail.getWriter());
-        values.put(COLUMN_NAME_STORY, novelDetail.getStory());
-        values.put(COLUMN_NAME_BIG_GENRE, novelDetail.getBigGenre());
-        values.put(COLUMN_NAME_GENRE, novelDetail.getGenre());
-        values.put(COLUMN_NAME_KEYWORD, novelDetail.getKeyword());
-        values.put(COLUMN_NAME_GENERAL_FIRSTUP, novelDetail.getGeneralFirstup());
-        values.put(COLUMN_NAME_GENERAL_LASTUP, novelDetail.getGeneralLastup());
-        values.put(COLUMN_NAME_NOVEL_TYPE, novelDetail.getNovelType());
-        values.put(COLUMN_NAME_END, novelDetail.getEnd());
-        values.put(COLUMN_NAME_LENGTH, novelDetail.getLength());
-        values.put(COLUMN_NAME_TIME, novelDetail.getTime());
-        values.put(COLUMN_NAME_IS_STOP, novelDetail.getIsStop());
-        values.put(COLUMN_NAME_IS_R15, novelDetail.getIsR15());
-        values.put(COLUMN_NAME_IS_BL, novelDetail.getIsBL());
-        values.put(COLUMN_NAME_IS_GL, novelDetail.getIsGL());
-        values.put(COLUMN_NAME_IS_TENSEI, novelDetail.getIsTensei());
-        values.put(COLUMN_NAME_IS_TENI, novelDetail.getIsTeni());
-        values.put(COLUMN_NAME_IS_ZANKOKU, novelDetail.getIsZankoku());
-        values.put(COLUMN_NAME_PC_OR_K, novelDetail.getPcOrK());
-        values.put(COLUMN_NAME_GLOBAL_POINT, novelDetail.getGlobalPoint());
-        values.put(COLUMN_NAME_FAV_NOVEL_CNT, novelDetail.getFavNovelCnt());
-        values.put(COLUMN_NAME_GENERAL_ALL_NO, novelDetail.getGeneralAllNo());
-        values.put(COLUMN_NAME_REVIEW_CNT, novelDetail.getReviewCnt());
-        values.put(COLUMN_NAME_ALL_HYOKA_CNT, novelDetail.getAllHyokaCnt());
-        values.put(COLUMN_NAME_ALL_POINT, novelDetail.getAllPoint());
-        values.put(COLUMN_NAME_SASIE_CNT, novelDetail.getSasieCnt());
-        values.put(COLUMN_NAME_KAIWARITU, novelDetail.getKaiwaritu());
-        values.put(COLUMN_NAME_NOVEL_UPDATED_AT, novelDetail.getNovelUpdatedAt());
-        values.put(COLUMN_NAME_UPDATED_AT, novelDetail.getUpdatedAt());
-        values.put(COLUMN_NAME_RANK, novelDetail.getRank());
+        long newRowId;
 
-        long newRowId = db.insert(TABLE_NAME, null, values);
+        db.beginTransactionNonExclusive();
+        try {
+
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_NAME_TITLE, novelDetail.getTitle());
+            values.put(COLUMN_NAME_N_CODE, novelDetail.getNCode());
+            values.put(COLUMN_NAME_USER_ID, novelDetail.getUserId());
+            values.put(COLUMN_NAME_WRITER, novelDetail.getWriter());
+            values.put(COLUMN_NAME_STORY, novelDetail.getStory());
+            values.put(COLUMN_NAME_BIG_GENRE, novelDetail.getBigGenre());
+            values.put(COLUMN_NAME_GENRE, novelDetail.getGenre());
+            values.put(COLUMN_NAME_KEYWORD, novelDetail.getKeyword());
+            values.put(COLUMN_NAME_GENERAL_FIRSTUP, novelDetail.getGeneralFirstup());
+            values.put(COLUMN_NAME_GENERAL_LASTUP, novelDetail.getGeneralLastup());
+            values.put(COLUMN_NAME_NOVEL_TYPE, novelDetail.getNovelType());
+            values.put(COLUMN_NAME_END, novelDetail.getEnd());
+            values.put(COLUMN_NAME_LENGTH, novelDetail.getLength());
+            values.put(COLUMN_NAME_TIME, novelDetail.getTime());
+            values.put(COLUMN_NAME_IS_STOP, novelDetail.getIsStop());
+            values.put(COLUMN_NAME_IS_R15, novelDetail.getIsR15());
+            values.put(COLUMN_NAME_IS_BL, novelDetail.getIsBL());
+            values.put(COLUMN_NAME_IS_GL, novelDetail.getIsGL());
+            values.put(COLUMN_NAME_IS_TENSEI, novelDetail.getIsTensei());
+            values.put(COLUMN_NAME_IS_TENI, novelDetail.getIsTeni());
+            values.put(COLUMN_NAME_IS_ZANKOKU, novelDetail.getIsZankoku());
+            values.put(COLUMN_NAME_PC_OR_K, novelDetail.getPcOrK());
+            values.put(COLUMN_NAME_GLOBAL_POINT, novelDetail.getGlobalPoint());
+            values.put(COLUMN_NAME_FAV_NOVEL_CNT, novelDetail.getFavNovelCnt());
+            values.put(COLUMN_NAME_GENERAL_ALL_NO, novelDetail.getGeneralAllNo());
+            values.put(COLUMN_NAME_REVIEW_CNT, novelDetail.getReviewCnt());
+            values.put(COLUMN_NAME_ALL_HYOKA_CNT, novelDetail.getAllHyokaCnt());
+            values.put(COLUMN_NAME_ALL_POINT, novelDetail.getAllPoint());
+            values.put(COLUMN_NAME_SASIE_CNT, novelDetail.getSasieCnt());
+            values.put(COLUMN_NAME_KAIWARITU, novelDetail.getKaiwaritu());
+            values.put(COLUMN_NAME_NOVEL_UPDATED_AT, novelDetail.getNovelUpdatedAt());
+            values.put(COLUMN_NAME_UPDATED_AT, novelDetail.getUpdatedAt());
+            values.put(COLUMN_NAME_RANK, novelDetail.getRank());
+
+            newRowId = db.insert(TABLE_NAME, null, values);
+
+            db.setTransactionSuccessful();
+        } finally {
+
+            db.endTransaction();
+        }
 
         db.close();
 
@@ -121,7 +132,7 @@ public class NarouDao {
      * @param novelBodies 小説の本文情報
      * @param nCode       Nコード
      */
-    public synchronized void insert(List<NovelBody> novelBodies, String nCode) {
+    public void insert(List<NovelBody> novelBodies, String nCode) {
 
         int novelId = getExistByNCode(nCode);
         if (-1 == novelId) {
@@ -130,19 +141,28 @@ public class NarouDao {
         }
 
         SQLiteDatabase db = mHelper.getWritableDatabase();
-        for (NovelBody novelBody : novelBodies) {
 
-            ContentValues values = new ContentValues();
-            values.put(NarouContract.NovelBody.COLUMN_NAME_NOVEL_ID, novelId);
-            values.put(NarouContract.NovelBody.COLUMN_NAME_TITLE, novelBody.getTitle());
-            values.put(NarouContract.NovelBody.COLUMN_NAME_PAGE, novelBody.getPage());
-            values.put(NarouContract.NovelBody.COLUMN_NAME_NOVEL_BODY, novelBody.getBody());
+        db.beginTransactionNonExclusive();
+        try {
 
-            long newRowId = db.insert(NarouContract.NovelBody.TABLE_NAME, null, values);
-            if (-1 == newRowId) {
+            for (NovelBody novelBody : novelBodies) {
 
-                // TODO 登録済みのレコード、もしくは登録失敗
+                ContentValues values = new ContentValues();
+                values.put(NarouContract.NovelBody.COLUMN_NAME_NOVEL_ID, novelId);
+                values.put(NarouContract.NovelBody.COLUMN_NAME_TITLE, novelBody.getTitle());
+                values.put(NarouContract.NovelBody.COLUMN_NAME_PAGE, novelBody.getPage());
+                values.put(NarouContract.NovelBody.COLUMN_NAME_NOVEL_BODY, novelBody.getBody());
+
+                long newRowId = db.insert(NarouContract.NovelBody.TABLE_NAME, null, values);
+                if (-1 == newRowId) {
+
+                    // TODO 登録済みのレコード、もしくは登録失敗
+                }
             }
+            db.setTransactionSuccessful();
+        } finally {
+
+            db.endTransaction();
         }
 
         db.close();
@@ -154,9 +174,7 @@ public class NarouDao {
      * @param ncode Nコード
      * @return novelテーブルのID
      */
-    private synchronized int getExistByNCode(String ncode) {
-
-        SQLiteDatabase db = mHelper.getReadableDatabase();
+    private int getExistByNCode(String ncode) {
 
         String[] projection = {
                 NarouContract.Novel._ID
@@ -164,15 +182,28 @@ public class NarouDao {
 
         String selection = COLUMN_NAME_N_CODE + " = ?";
         String[] selectionArgs = {ncode};
-        Cursor cursor = db.query(
-                NarouContract.Novel.TABLE_NAME,           // The table to query
-                projection,                               // The columns to return
-                selection,                                // The columns for the WHERE clause
-                selectionArgs,                            // The values for the WHERE clause
-                null,                             // don't group the rows
-                null,                              // don't filter by row groups
-                null                              // The sort order
-        );
+
+        SQLiteDatabase db = mHelper.getReadableDatabase();
+
+        Cursor cursor;
+
+        db.beginTransactionNonExclusive();
+        try {
+
+            cursor = db.query(
+                    NarouContract.Novel.TABLE_NAME,           // The table to query
+                    projection,                               // The columns to return
+                    selection,                                // The columns for the WHERE clause
+                    selectionArgs,                            // The values for the WHERE clause
+                    null,                             // don't group the rows
+                    null,                              // don't filter by row groups
+                    null                              // The sort order
+            );
+            db.setTransactionSuccessful();
+        } finally {
+
+            db.endTransaction();
+        }
 
         int novelId = -1;
         if (null != cursor && cursor.getCount() > 0) {
@@ -192,21 +223,32 @@ public class NarouDao {
      * @param nCode Nコード
      * @return 小説の基本情報
      */
-    public synchronized NovelDetail findNovelDetailByNCode(String nCode) {
+    public NovelDetail findNovelDetailByNCode(String nCode) {
 
         SQLiteDatabase db = mHelper.getReadableDatabase();
 
         String selection = COLUMN_NAME_N_CODE + " = ?";
         String[] selectionArgs = {nCode};
-        Cursor cursor = db.query(
-                NarouContract.Novel.TABLE_NAME,           // The table to query
-                null,                             // The columns to return
-                selection,                                // The columns for the WHERE clause
-                selectionArgs,                            // The values for the WHERE clause
-                null,                            // don't group the rows
-                null,                             // don't filter by row groups
-                null                             // The sort order
-        );
+
+        Cursor cursor = null;
+
+        db.beginTransactionNonExclusive();
+        try {
+
+            cursor = db.query(
+                    NarouContract.Novel.TABLE_NAME,           // The table to query
+                    null,                             // The columns to return
+                    selection,                                // The columns for the WHERE clause
+                    selectionArgs,                            // The values for the WHERE clause
+                    null,                            // don't group the rows
+                    null,                             // don't filter by row groups
+                    null                             // The sort order
+            );
+            db.setTransactionSuccessful();
+        } finally {
+
+            db.endTransaction();
+        }
 
         NovelDetail novelDetail = null;
         if (null != cursor && cursor.getCount() > 0) {
@@ -259,19 +301,29 @@ public class NarouDao {
      *
      * @return 登録済み小説の基本情報
      */
-    public synchronized List<NovelDetail> findAllNovelDetail() {
+    public List<NovelDetail> findAllNovelDetail() {
 
         SQLiteDatabase db = mHelper.getReadableDatabase();
 
-        Cursor cursor = db.query(
-                NarouContract.Novel.TABLE_NAME,           // The table to query
-                null,                             // The columns to return
-                null,                                // The columns for the WHERE clause
-                null,                            // The values for the WHERE clause
-                null,                            // don't group the rows
-                null,                             // don't filter by row groups
-                null                             // The sort order
-        );
+        Cursor cursor = null;
+
+        db.beginTransactionNonExclusive();
+        try {
+
+            cursor = db.query(
+                    NarouContract.Novel.TABLE_NAME,           // The table to query
+                    null,                             // The columns to return
+                    null,                                // The columns for the WHERE clause
+                    null,                            // The values for the WHERE clause
+                    null,                            // don't group the rows
+                    null,                             // don't filter by row groups
+                    null                             // The sort order
+            );
+            db.setTransactionSuccessful();
+        } finally {
+
+            db.endTransaction();
+        }
 
         List<NovelDetail> novelDetails = null;
         if (null != cursor && cursor.getCount() > 0) {
@@ -330,7 +382,7 @@ public class NarouDao {
      *
      * @return 登録済み小説の基本情報
      */
-    public synchronized List<NovelBody> findNovelBodyByNCode(String nCode) {
+    public List<NovelBody> findNovelBodyByNCode(String nCode) {
 
         int novelId = getExistByNCode(nCode);
         if (-1 == novelId) {
@@ -341,16 +393,27 @@ public class NarouDao {
         SQLiteDatabase db = mHelper.getReadableDatabase();
 
         String selection = NarouContract.NovelBody.COLUMN_NAME_NOVEL_ID + " = ?";
-        String[] selectionArgs = { String.valueOf(novelId) };
-        Cursor cursor = db.query(
-                NarouContract.NovelBody.TABLE_NAME,           // The table to query
-                null,                             // The columns to return
-                selection,                                // The columns for the WHERE clause
-                selectionArgs,                            // The values for the WHERE clause
-                null,                            // don't group the rows
-                null,                             // don't filter by row groups
-                null                             // The sort order
-        );
+        String[] selectionArgs = {String.valueOf(novelId)};
+
+        Cursor cursor = null;
+
+        db.beginTransactionNonExclusive();
+        try {
+
+            cursor = db.query(
+                    NarouContract.NovelBody.TABLE_NAME,           // The table to query
+                    null,                             // The columns to return
+                    selection,                                // The columns for the WHERE clause
+                    selectionArgs,                            // The values for the WHERE clause
+                    null,                            // don't group the rows
+                    null,                             // don't filter by row groups
+                    null                             // The sort order
+            );
+            db.setTransactionSuccessful();
+        } finally {
+
+            db.endTransaction();
+        }
 
         List<NovelBody> novelBodies = null;
         if (null != cursor && cursor.getCount() > 0) {

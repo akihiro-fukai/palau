@@ -4,15 +4,15 @@ import com.example.akihiro.palau.R;
 
 import narou4j.enums.RankingType;
 
-public class FragmentRankingRankingQuarter extends FragmentRankingBase {
+public class RankingMonthlyNarouApiFragment extends RankingBaseNarouApiFragment {
 
-    private static FragmentRankingRankingQuarter sSelf;
+    private static RankingMonthlyNarouApiFragment sSelf;
 
-    public static FragmentRankingRankingQuarter getInstance() {
+    public static RankingMonthlyNarouApiFragment getInstance() {
 
         if (null == sSelf) {
 
-            sSelf = new FragmentRankingRankingQuarter();
+            sSelf = new RankingMonthlyNarouApiFragment();
         }
         return sSelf;
     }
@@ -24,7 +24,7 @@ public class FragmentRankingRankingQuarter extends FragmentRankingBase {
     @Override
     protected RankingType getRType() {
 
-        return RankingType.QUARTET;
+        return RankingType.MONTHLY;
     }
 
     // ------------------------------
@@ -34,12 +34,12 @@ public class FragmentRankingRankingQuarter extends FragmentRankingBase {
     @Override
     protected int getLayoutResId() {
 
-        return R.layout.fragment_ranking_quarter;
+        return R.layout.fragment_ranking_monthly;
     }
 
     @Override
     protected int getRankingDetailViewId() {
 
-        return R.id.ranking_quarter_recycler_view;
+        return R.id.ranking_monthly_recycler_view;
     }
 }

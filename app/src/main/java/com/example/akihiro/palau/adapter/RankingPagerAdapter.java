@@ -7,10 +7,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.akihiro.palau.R;
-import com.example.akihiro.palau.fragment.FragmentRankingRankingDaily;
-import com.example.akihiro.palau.fragment.FragmentRankingRankingMonthly;
-import com.example.akihiro.palau.fragment.FragmentRankingRankingQuarter;
-import com.example.akihiro.palau.fragment.FragmentRankingRankingWeekly;
+import com.example.akihiro.palau.fragment.RankingDailyNarouApiFragment;
+import com.example.akihiro.palau.fragment.RankingMonthlyNarouApiFragment;
+import com.example.akihiro.palau.fragment.RankingQuarterNarouApiFragment;
+import com.example.akihiro.palau.fragment.RankingWeeklyNarouApiFragment;
 
 public class RankingPagerAdapter extends FragmentPagerAdapter {
 
@@ -32,16 +32,16 @@ public class RankingPagerAdapter extends FragmentPagerAdapter {
 
             case 0:
 
-                return FragmentRankingRankingDaily.getInstance();
+                return RankingDailyNarouApiFragment.getInstance();
             case 1:
 
-                return FragmentRankingRankingWeekly.getInstance();
+                return RankingWeeklyNarouApiFragment.getInstance();
             case 2:
 
-                return FragmentRankingRankingMonthly.getInstance();
+                return RankingMonthlyNarouApiFragment.getInstance();
             case 3:
 
-                return FragmentRankingRankingQuarter.getInstance();
+                return RankingQuarterNarouApiFragment.getInstance();
             default:
                 return null;
         }

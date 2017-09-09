@@ -27,7 +27,7 @@ import static com.example.akihiro.palau.net.common.RequestParam.LIMIT;
 import static com.example.akihiro.palau.net.common.RequestParam.NCODE;
 import static com.example.akihiro.palau.net.common.RequestType.RANKING_DETAIL;
 
-public abstract class FragmentRankingBase extends FragmentBase implements AsyncNarouRankingApiClient.OnNarouRankingApiListener {
+public abstract class RankingBaseNarouApiFragment extends NarouApiBaseFragment implements AsyncNarouRankingApiClient.OnNarouRankingApiListener {
 
     private HashMap<String, Integer> mRankingMap = new HashMap<>();
     private List<NovelDetail> mNovelDetails;

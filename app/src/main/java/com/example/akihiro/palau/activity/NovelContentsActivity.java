@@ -10,8 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.example.akihiro.palau.R;
-import com.example.akihiro.palau.fragment.FragmentNovelPage;
+import com.example.akihiro.palau.fragment.NovelPageFragment;
 
+/**
+ * NovelContentsActivityクラスは小説の目次一覧を表示する機能を提供します。
+ */
 public class NovelContentsActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
     @Override
@@ -34,7 +37,7 @@ public class NovelContentsActivity extends AppCompatActivity implements ViewPage
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        FragmentNovelPage fragmentTopPage = new FragmentNovelPage();
+        NovelPageFragment fragmentTopPage = new NovelPageFragment();
         fragmentTopPage.setArguments(getIntent().getExtras());
         fragmentTransaction.add(R.id.fragment_container, fragmentTopPage);
         fragmentTransaction.commit();

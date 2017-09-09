@@ -1,5 +1,6 @@
 package com.example.akihiro.palau.activity;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +20,9 @@ import narou4j.entities.NovelBody;
 import static com.example.akihiro.palau.common.UICommonUtil.NOVEL_NCODE;
 import static com.example.akihiro.palau.common.UICommonUtil.NOVEL_PAGE;
 
+/**
+ * NovelPageActivityクラスは小説の本文を表示する機能を提供します。
+ */
 public class NovelPageActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
     @Override
@@ -42,7 +46,7 @@ public class NovelPageActivity extends AppCompatActivity implements ViewPager.On
         String nCode = bundle.getString(NOVEL_NCODE);
         int page = bundle.getInt(NOVEL_PAGE);
         AsyncNovelBodyLoadTask client = new AsyncNovelBodyLoadTask(nCode, page);
-        client.execute();
+        client.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     @Override
@@ -76,6 +80,7 @@ public class NovelPageActivity extends AppCompatActivity implements ViewPager.On
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class AsyncNovelBodyLoadTask extends AsyncTask<Void, Void, List<NovelBody>> {
 
         private String mNCode;

@@ -1,13 +1,13 @@
 package com.example.akihiro.palau.activity;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,18 +18,18 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.akihiro.palau.R;
-import com.example.akihiro.palau.fragment.FragmentDownloadList;
 
 /**
- *
+ * NavigationActivityクラスはナビゲーションメニューを持ったアクティビティの親クラスです。
  */
-public class NavigationActivity extends AppCompatActivity
+public abstract class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(getScreenLayoutId());
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -43,7 +43,7 @@ public class NavigationActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(getNavigationLayoutId());
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -51,17 +51,6 @@ public class NavigationActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        /*
-         * ダウンロード一覧画面を表示
-         */
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        FragmentDownloadList fragmentDownloadList = new FragmentDownloadList();
-        fragmentTransaction.add(R.id.fragment_container, fragmentDownloadList);
-        fragmentTransaction.commit();
     }
 
     @Override
@@ -100,52 +89,53 @@ public class NavigationActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        switch (id) {
-
-            // ランキング
-            case R.id.nav_novel_rank:
-
-                onClickRanking();
-                break;
-            default:
-                break;
-        }
-
-        if (id == R.id.nav_camera) {
-
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
+        onNavigationItemSelected(id);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
+    /**
+     * フラグメントを置換します。
+     *
+     * @param fragment フラグメント
+     */
+    protected void replace(Fragment fragment) {
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.commit();
+    }
+
     // ------------------------------
-    // クリックイベント
+    // コールバック
     // ------------------------------
 
     /**
-     * ランキングを表示します。
+     * レイアウトのリソースIDを取得します。
+     *
+     * @return レイアウトのリソースID
      */
-    private void onClickRanking() {
+    protected abstract int getScreenLayoutId();
 
-        Intent intent = new Intent(getApplicationContext(), RankingActivity.class);
-        startActivity(intent);
-    }
+    /**
+     * ナビゲーションメニューのリソースIDを取得します。
+     *
+     * @return ナビゲーションメニューのリソースID
+     */
+    protected abstract int getNavigationLayoutId();
+
+    /**
+     * ナビゲーションメニューの選択を通知します。
+     *
+     * @param id 選択したメニュー
+     */
+    protected abstract void onNavigationItemSelected(int id);
 }

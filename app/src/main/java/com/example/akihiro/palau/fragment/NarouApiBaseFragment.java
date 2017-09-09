@@ -14,7 +14,7 @@ import com.example.akihiro.palau.net.common.RequestType;
 import java.util.HashMap;
 import java.util.Set;
 
-public abstract class FragmentBase extends Fragment {
+public abstract class NarouApiBaseFragment extends Fragment {
 
     private RequestType mRequestType;
 

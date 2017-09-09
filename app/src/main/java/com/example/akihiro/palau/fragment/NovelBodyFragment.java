@@ -14,7 +14,7 @@ import java.util.List;
 
 import narou4j.entities.NovelBody;
 
-public class FragmentNovelBody extends Fragment {
+public class NovelBodyFragment extends Fragment {
 
     private NovelBody mNovelBody;
 

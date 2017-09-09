@@ -20,7 +20,7 @@ import narou4j.entities.NovelBody;
 
 import static com.example.akihiro.palau.common.UICommonUtil.NOVEL_NCODE;
 
-public class FragmentNovelPage extends Fragment {
+public class NovelPageFragment extends Fragment {
 
     @Nullable
     @Override
@@ -41,7 +41,7 @@ public class FragmentNovelPage extends Fragment {
         }
 
         AsyncNovelLoadTask novelLoadTask = new AsyncNovelLoadTask(nCode);
-        novelLoadTask.execute();
+        novelLoadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     private class AsyncNovelLoadTask extends AsyncTask<Void, Void, List<NovelBody>> {

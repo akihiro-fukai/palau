@@ -1,9 +1,9 @@
 package com.example.akihiro.palau.fragment;
 
-import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +17,7 @@ import com.example.akihiro.palau.net.response.item.NovelDetail;
 
 import java.util.List;
 
-public class FragmentDownloadList extends Fragment {
+public class DownloadListFragment extends Fragment {
 
     @Nullable
     @Override
@@ -31,7 +31,7 @@ public class FragmentDownloadList extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         AsyncNovelLoadTask novelLoadTask = new AsyncNovelLoadTask();
-        novelLoadTask.execute();
+        novelLoadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     private class AsyncNovelLoadTask extends AsyncTask<Void, Void, List<NovelDetail>> {
@@ -40,7 +40,8 @@ public class FragmentDownloadList extends Fragment {
         protected List<NovelDetail> doInBackground(Void... voids) {
 
             NarouDao dao = new NarouDao(getContext());
-            return dao.findAllNovelDetail();
+            List<NovelDetail> novelDetails = dao.findAllNovelDetail();
+            return novelDetails;
         }
 
         @Override

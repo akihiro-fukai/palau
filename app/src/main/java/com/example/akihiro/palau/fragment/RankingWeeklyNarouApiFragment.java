@@ -4,15 +4,15 @@ import com.example.akihiro.palau.R;
 
 import narou4j.enums.RankingType;
 
-public class FragmentRankingRankingWeekly extends FragmentRankingBase {
+public class RankingWeeklyNarouApiFragment extends RankingBaseNarouApiFragment {
 
-    private static FragmentRankingRankingWeekly sSelf;
+    private static RankingWeeklyNarouApiFragment sSelf;
 
-    public static FragmentRankingRankingWeekly getInstance() {
+    public static RankingWeeklyNarouApiFragment getInstance() {
 
         if (null == sSelf) {
 
-            sSelf = new FragmentRankingRankingWeekly();
+            sSelf = new RankingWeeklyNarouApiFragment();
         }
         return sSelf;
     }
