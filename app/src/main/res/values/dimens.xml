@@ -41,4 +41,12 @@
     <dimen name="ranking_detail_dialog_close_button_margin">8dp</dimen>
     <dimen name="ranking_detail_dialog_message_line_space">6dp</dimen>
 
+    <!-- 小説本文 -->
+    <dimen name="novel_page_title_text_size">24sp</dimen>
+    <dimen name="novel_page_body_padding">16dp</dimen>
+    <dimen name="novel_page_body_text_size_small">12sp</dimen>
+    <dimen name="novel_page_body_text_size_normal">16sp</dimen>
+    <dimen name="novel_page_body_text_size_large">20sp</dimen>
+    <dimen name="novel_page_body_line_spacing_extra">4dp</dimen>
+
 </resources>

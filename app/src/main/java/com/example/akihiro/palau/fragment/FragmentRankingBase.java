@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.akihiro.palau.adapter.RankingListAdapter;
+import com.example.akihiro.palau.adapter.RankingListRecyclerAdapter;
 import com.example.akihiro.palau.net.AsyncNarouRankingApiClient;
 import com.example.akihiro.palau.net.NetConfig;
 import com.example.akihiro.palau.net.common.RequestParam;
@@ -155,7 +155,7 @@ public abstract class FragmentRankingBase extends FragmentBase implements AsyncN
 
     private void setRankingDetailView(List<NovelDetail> novelDetails) {
 
-        RankingListAdapter adapter = new RankingListAdapter(
+        RankingListRecyclerAdapter adapter = new RankingListRecyclerAdapter(
                 getContext(),
                 getActivity().getSupportFragmentManager(),
                 novelDetails);

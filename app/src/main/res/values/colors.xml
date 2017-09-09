@@ -5,8 +5,8 @@
     <color name="color_accent">#c7ddae</color>
 
     <!-- ツールバー -->
-    <color name="toolbar_text_primary">#fff</color>
-    <color name="toolbar_text_secondary">#fff</color>
+    <color name="toolbar_text_primary">#69635d</color>
+    <color name="toolbar_text_secondary">#69635d</color>
 
     <!-- ダイアログ -->
     <color name="dialog_button_primary">#c7ddae</color>

@@ -11,13 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.akihiro.palau.R;
-import com.example.akihiro.palau.adapter.DownloadListAdapter;
+import com.example.akihiro.palau.adapter.DownloadListRecyclerAdapter;
 import com.example.akihiro.palau.database.NarouDao;
 import com.example.akihiro.palau.net.response.item.NovelDetail;
 
 import java.util.List;
 
-public class FragmentTopPage extends Fragment {
+public class FragmentDownloadList extends Fragment {
 
     @Nullable
     @Override
@@ -56,7 +56,7 @@ public class FragmentTopPage extends Fragment {
          */
         private void setExpandableList(List<NovelDetail> novelDetails) {
 
-            DownloadListAdapter adapter = new DownloadListAdapter(getContext(), novelDetails);
+            DownloadListRecyclerAdapter adapter = new DownloadListRecyclerAdapter(getContext(), novelDetails);
             RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.top_page_download_recycler_view);
             recyclerView.setHasFixedSize(true);
 

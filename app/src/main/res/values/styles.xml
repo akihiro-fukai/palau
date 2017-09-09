@@ -6,6 +6,43 @@
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
+
+        <!--アクションバー-->
+        <item name="android:actionBarStyle">@style/AppThemeActionBar</item>
+        <item name="android:actionBarTabTextStyle">@style/TabTextStyle</item>
+        <item name="android:actionMenuTextColor">@color/toolbar_text_secondary</item>
+
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/AppThemeActionBar</item>
+        <item name="actionBarTabTextStyle">@style/TabTextStyle</item>
+        <item name="actionMenuTextColor">@color/toolbar_text_secondary</item>
+
+        <item name="actionBarStyle">@style/actionBarStyle</item>
+        <item name="android:actionBarStyle">@style/actionBarStyle</item>
+    </style>
+    <style name="actionBarStyle" parent="@style/Widget.AppCompat.ActionBar.Solid">
+
+        <item name="android:textColorSecondary">@color/toolbar_text_secondary</item>
+    </style>
+    <!-- general styles for the action bar -->
+    <style name="AppThemeActionBar" parent="@style/Widget.AppCompat.ActionBar">
+
+        <item name="android:titleTextStyle">@style/TitleTextStyle</item>
+        <item name="android:background">@color/color_primary</item>
+
+        <!-- Support library compatibility -->
+        <item name="titleTextStyle">@style/TitleTextStyle</item>
+        <item name="background">@color/color_primary</item>
+    </style>
+
+    <!-- action bar title text -->
+    <style name="TitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/toolbar_text_primary</item>
+    </style>
+
+    <!-- action bar tab text -->
+    <style name="TabTextStyle" parent="@style/Widget.AppCompat.ActionBar.TabText">
+        <item name="android:textColor">@color/toolbar_text_primary</item>
     </style>
 
     <!-- Toolbar theme. -->

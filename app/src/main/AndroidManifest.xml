@@ -27,11 +27,18 @@
 
         <activity
             android:name=".activity.RankingActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".activity.NovelContentsActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name=".activity.NovelPageActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

@@ -11,16 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.akihiro.palau.R;
-import com.example.akihiro.palau.adapter.DownloadListAdapter;
-import com.example.akihiro.palau.adapter.NovelPageAdapter;
+import com.example.akihiro.palau.adapter.NovelContentsRecyclerAdapter;
 import com.example.akihiro.palau.database.NarouDao;
-import com.example.akihiro.palau.net.response.item.NovelDetail;
 
 import java.util.List;
 
 import narou4j.entities.NovelBody;
 
-import static com.example.akihiro.palau.common.UICommonUtil.NOVEL_PAGE_NCODE;
+import static com.example.akihiro.palau.common.UICommonUtil.NOVEL_NCODE;
 
 public class FragmentNovelPage extends Fragment {
 
@@ -37,9 +35,9 @@ public class FragmentNovelPage extends Fragment {
 
         String nCode = null;
         Bundle bundle = getArguments();
-        if (null != bundle && bundle.containsKey(NOVEL_PAGE_NCODE)) {
+        if (null != bundle && bundle.containsKey(NOVEL_NCODE)) {
 
-            nCode = bundle.getString(NOVEL_PAGE_NCODE);
+            nCode = bundle.getString(NOVEL_NCODE);
         }
 
         AsyncNovelLoadTask novelLoadTask = new AsyncNovelLoadTask(nCode);
@@ -75,7 +73,7 @@ public class FragmentNovelPage extends Fragment {
          */
         private void setExpandableList(List<NovelBody> novelBodies) {
 
-            NovelPageAdapter adapter = new NovelPageAdapter(getContext(), novelBodies);
+            NovelContentsRecyclerAdapter adapter = new NovelContentsRecyclerAdapter(getContext(), mNCode, novelBodies);
             RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.novel_page_recycler_view);
             recyclerView.setHasFixedSize(true);
 

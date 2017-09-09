@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -17,8 +18,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.akihiro.palau.R;
-import com.example.akihiro.palau.fragment.FragmentTopPage;
+import com.example.akihiro.palau.fragment.FragmentDownloadList;
 
+/**
+ *
+ */
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -48,23 +52,27 @@ public class NavigationActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // --------------------
-        // フラグメント初期化
-        // --------------------
+        /*
+         * ダウンロード一覧画面を表示
+         */
+
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        FragmentTopPage fragmentTopPage = new FragmentTopPage();
-        fragmentTransaction.add(R.id.fragment_container, fragmentTopPage);
+        FragmentDownloadList fragmentDownloadList = new FragmentDownloadList();
+        fragmentTransaction.add(R.id.fragment_container, fragmentDownloadList);
         fragmentTransaction.commit();
     }
 
     @Override
     public void onBackPressed() {
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
+
             drawer.closeDrawer(GravityCompat.START);
         } else {
+
             super.onBackPressed();
         }
     }
@@ -94,16 +102,16 @@ public class NavigationActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         switch (id) {
 
+            // ランキング
             case R.id.nav_novel_rank:
 
-                Intent intent = new Intent(getApplicationContext(), RankingActivity.class);
-                startActivity(intent);
+                onClickRanking();
                 break;
             default:
                 break;
@@ -126,5 +134,18 @@ public class NavigationActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    // ------------------------------
+    // クリックイベント
+    // ------------------------------
+
+    /**
+     * ランキングを表示します。
+     */
+    private void onClickRanking() {
+
+        Intent intent = new Intent(getApplicationContext(), RankingActivity.class);
+        startActivity(intent);
     }
 }

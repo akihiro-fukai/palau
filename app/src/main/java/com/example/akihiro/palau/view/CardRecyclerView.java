@@ -13,6 +13,6 @@ public class CardRecyclerView extends RecyclerView {
 
     public void setRecyclerAdapter(Context context){
         setLayoutManager(new LinearLayoutManager(context));
-//        setAdapter(new RankingListAdapter(context,new String[]{"aaa","vvv","ddd","vvv","ddd","vvv","ddd","vvv","ddd","vvv","ddd"}));
+//        setAdapter(new RankingListRecyclerAdapter(context,new String[]{"aaa","vvv","ddd","vvv","ddd","vvv","ddd","vvv","ddd","vvv","ddd"}));
     }
 }

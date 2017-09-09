@@ -1,21 +1,23 @@
 package com.example.akihiro.palau.activity;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.example.akihiro.palau.R;
-import com.example.akihiro.palau.adapter.RankingPagerAdapter;
-import com.example.akihiro.palau.fragment.FragmentNovelPage;
-import com.example.akihiro.palau.fragment.FragmentTopPage;
+import com.example.akihiro.palau.adapter.NovelPagePagerAdapter;
+import com.example.akihiro.palau.database.NarouDao;
 
-import static com.example.akihiro.palau.common.UICommonUtil.NOVEL_PAGE_NCODE;
+import java.util.List;
+
+import narou4j.entities.NovelBody;
+
+import static com.example.akihiro.palau.common.UICommonUtil.NOVEL_NCODE;
+import static com.example.akihiro.palau.common.UICommonUtil.NOVEL_PAGE;
 
 public class NovelPageActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
@@ -23,7 +25,7 @@ public class NovelPageActivity extends AppCompatActivity implements ViewPager.On
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_novel_page);
+        setContentView(R.layout.activity_novel_body);
 
         ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {
@@ -36,13 +38,11 @@ public class NovelPageActivity extends AppCompatActivity implements ViewPager.On
         // フラグメント初期化
         // --------------------
 
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        FragmentNovelPage fragmentTopPage = new FragmentNovelPage();
-        fragmentTopPage.setArguments(getIntent().getExtras());
-        fragmentTransaction.add(R.id.fragment_container, fragmentTopPage);
-        fragmentTransaction.commit();
+        Bundle bundle = getIntent().getExtras();
+        String nCode = bundle.getString(NOVEL_NCODE);
+        int page = bundle.getInt(NOVEL_PAGE);
+        AsyncNovelBodyLoadTask client = new AsyncNovelBodyLoadTask(nCode, page);
+        client.execute();
     }
 
     @Override
@@ -74,5 +74,43 @@ public class NovelPageActivity extends AppCompatActivity implements ViewPager.On
     @Override
     public void onPageScrollStateChanged(int i) {
 
+    }
+
+    private class AsyncNovelBodyLoadTask extends AsyncTask<Void, Void, List<NovelBody>> {
+
+        private String mNCode;
+        private int mPage;
+
+        AsyncNovelBodyLoadTask(String nCode, int page) {
+
+            mNCode = nCode;
+            mPage = page;
+        }
+
+        @Override
+        protected List<NovelBody> doInBackground(Void... voids) {
+
+            NarouDao dao = new NarouDao(getApplicationContext());
+            return dao.findNovelBodyByNCode(mNCode);
+        }
+
+        @Override
+        protected void onPostExecute(List<NovelBody> novelBodies) {
+
+            setNovelBody(novelBodies);
+        }
+
+        /**
+         * ダウンロードした小説の内容を表示します。
+         *
+         * @param novelBodies 小説の基本情報
+         */
+        private void setNovelBody(List<NovelBody> novelBodies) {
+
+            ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+            NovelPagePagerAdapter rankingPagerAdapter = new NovelPagePagerAdapter(getSupportFragmentManager(), novelBodies);
+            viewPager.setAdapter(rankingPagerAdapter);
+            viewPager.setCurrentItem(mPage);
+        }
     }
 }
